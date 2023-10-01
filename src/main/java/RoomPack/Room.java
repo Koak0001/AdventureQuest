@@ -12,9 +12,9 @@ public class Room {
     public Room southRoom;
     public Room westRoom;
     public boolean visited;
-    private ArrayList<Item> items;
+    private final ArrayList<Item> items;
 
-    public Room(String roomName, String roomDesc, Item item) {
+    public Room(String roomName, String roomDesc) {
         this.roomName = roomName;
         this.roomDesc = roomDesc;
         this.items = new ArrayList<>();
@@ -73,7 +73,9 @@ public class Room {
     }
 
     // Add an item to the room
-    public void addItem(Item item) {
-        items.add(item);}
-
+    public void addItem(Item roomItem)  {
+        if (roomItem != null) {
+            items.add(roomItem);
+        }
+    }
 }

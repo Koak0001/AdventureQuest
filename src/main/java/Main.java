@@ -9,7 +9,6 @@ public class Main {
         Map map = new Map();
         Adventure adventure = new Adventure(map);
         UserInterface ui = new UserInterface(adventure);
-
         ui.play();
     }
 }

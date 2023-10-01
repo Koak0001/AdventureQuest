@@ -7,15 +7,14 @@ import java.util.ArrayList;
 
 public class Map {
     private Room currentRoom;
-    private ArrayList<Item> itemsInRooms;
+    private ArrayList<Item> items;
     public Map() {
         initializeMap();
     }
     private void initializeMap() {
-        // Initialize itemsInRooms
-        ItemDatabase itemDatabase = new ItemDatabase();
-        itemsInRooms = new ArrayList<>();
-        itemsInRooms.add(new ArrayList<>()); // Add an empty ArrayList for each room
+        ItemDatabase itemDatabase = new ItemDatabase(); // Initialize your item database
+        items = new ArrayList<>(); // Initialize the ArrayList to store items in rooms
+
 
         // Room overview
         Room room1 = new Room("Room 1 - the Entry Hall\n", "A grand chamber with faded tapestries that once depicted heroic battles.\nThe once-marble floor is now cracked and worn, and a chandelier hangs precariously from the ceiling.\n");
@@ -59,8 +58,24 @@ public class Map {
 
         currentRoom = room1;
 
-        Item item1 = ItemDatabase.item1; // Get an item from your ItemDatabase
-        room1.items.add(item1); // Add the item to the room's ArrayList of items
+        Item item1 = itemDatabase.items.get(0);
+        room1.addItem(item1);
+        Item item2 = itemDatabase.items.get(1);
+        room2.addItem(item2);
+        Item item3 = itemDatabase.items.get(2);
+        room8.addItem(item3);
+        Item item4 = itemDatabase.items.get(3);
+        room3.addItem(item4);
+        Item item5 = itemDatabase.items.get(4);
+        room7.addItem(item5);
+        Item item6 = itemDatabase.items.get(5);
+        room7.addItem(item6);
+        Item item7 = itemDatabase.items.get(6);
+        room5.addItem(item7);
+        Item item8 = itemDatabase.items.get(7);
+        room5.addItem(item8);
+        Item item9 = itemDatabase.items.get(8);
+        room5.addItem(item9);
     }
 
     // Getter for the current room
@@ -71,5 +86,6 @@ public class Map {
         return currentRoom;}
 
 
-    }
+
+}
 
