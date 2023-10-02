@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Map {
     private Room currentRoom;
+    private Room requestRoom;
     private ArrayList<Item> items;
     public Map() {
         initializeMap();
@@ -85,7 +86,16 @@ public class Map {
     public Room getCurrentRoom() {
         return currentRoom;}
 
+    public void setRequestRoom(Room requestRoom) {
+        this.requestRoom = requestRoom;
+    }
 
-
+    public Room getRequestRoom() {
+        return requestRoom;
+    }
 }
+
+
+
+
 

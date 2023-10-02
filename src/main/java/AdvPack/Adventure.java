@@ -9,6 +9,7 @@ public class Adventure {
     public Adventure(Map map) {
         this.map = map; // Initialize map
         this.player = new Player(map); // Initialize player
+
     }
 
     public void newGame() {
@@ -17,6 +18,7 @@ public class Adventure {
         player.setPlayerLocation(map.getCurrentRoom()); // set start location
 
     }
+
 
 
 }
