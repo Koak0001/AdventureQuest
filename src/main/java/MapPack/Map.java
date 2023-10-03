@@ -93,7 +93,7 @@ public class Map {
         Food food6 = (Food) itemDatabase.items.get(14);
         room7.addItem(food6);
         Food food7 = (Food) itemDatabase.items.get(15);
-        room7.addItem(food7);
+        room1.addItem(food7);
         Food food8 = (Food) itemDatabase.items.get(16);
         room2.addItem(food8);
         Food food9 = (Food) itemDatabase.items.get(17);

@@ -10,13 +10,13 @@ public class Player {
     private final Map map;
     private Room playerLocation;
     private int health;
-    private int hunger;
     public List<Item> inventory;
 
     public Player(Map map) {
         this.map = map;
         this.inventory = new ArrayList<>();
         this.playerLocation = map.getCurrentRoom();
+        this.health = Math.min(100, health);
     }
 
     public void setPlayerLocation(Room playerLocation) {
@@ -30,6 +30,12 @@ public class Player {
         if (item != null) {
             inventory.add(item);
         }
+    }
+    public int getHealth() {
+        return health;
+    }
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
 

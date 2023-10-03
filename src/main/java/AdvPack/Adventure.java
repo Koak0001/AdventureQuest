@@ -9,7 +9,6 @@ public class Adventure {
     public Adventure(Map map) {
         this.map = map; // Initialize map
         this.player = new Player(map); // Initialize player
-
     }
 
     public void newGame() {

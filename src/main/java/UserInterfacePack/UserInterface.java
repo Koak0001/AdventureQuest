@@ -20,6 +20,7 @@ public class UserInterface {
         this.adventure = adventure;
         this.map = new Map();
         this.player = new Player(map);
+        player.setHealth(100);
 
         play();
     }
@@ -74,6 +75,7 @@ public class UserInterface {
                     displayInventory();
                     validCommandProcessed = true;
                 }
+                case "healthbar", "health" -> {displayHealth(); validCommandProcessed = true;}
             }
 
             if (!validCommandProcessed && inputTokens.length == 2) {
@@ -108,6 +110,9 @@ public class UserInterface {
         public void look () {
             System.out.println("You are standing in " + map.getCurrentRoom().getRoomName() + map.getCurrentRoom().getRoomDesc());
         }
+        public void displayHealth() {
+            System.out.println("You have " + player.getHealth() + " health points.");
+    }
         public void search () {
             System.out.println("You search the room for treasures.");
             System.out.println();
@@ -151,28 +156,36 @@ public class UserInterface {
             }
         }
     public void eatFood(String itemName) {
+
         Room currentRoom = map.getCurrentRoom();
         itemName = itemName.trim().toLowerCase();
-        Item itemToRemove = null;
+        Item foodToEat = null;
 
         for (Item item : player.getInventory()) {
             if (item.getItemName().toLowerCase().replaceAll("\\s+", "").equals(itemName.replaceAll("\\s+", ""))) {
-                itemToRemove = item;
+                foodToEat = item;
                 break;
             }
         }
-        if (itemToRemove != null) {
-            if (itemToRemove instanceof Food) {
-                Food food = (Food) itemToRemove; // Cast to Food
-                System.out.println(food.getEffect());
+        if (foodToEat != null) {
+            if (foodToEat instanceof Food) {
+                int currentHealth = player.getHealth();
+                int healthMod = ((Food) foodToEat).getHealthMod();
+                System.out.println(player.getHealth());
+                player.setHealth(currentHealth + healthMod);
+                Food food = (Food) foodToEat;
+                System.out.println("You consume a " + food.getItemName() + " it is " + food.getEffect());
+                System.out.println();
+                System.out.println(player.getHealth());
             } else {
                 System.out.println("This item is not food.");
             }
-            player.getInventory().remove(itemToRemove);
+            player.getInventory().remove(foodToEat);
         } else {
             System.out.println("Item not found in your inventory.");
         }
     }
+
         public void removeItemFromInventory (String itemName){
         Room currentRoom = map.getCurrentRoom();
         itemName = itemName.trim().toLowerCase();
@@ -194,17 +207,25 @@ public class UserInterface {
 
         public void moveTo(Room requestedRoom) {
             if (requestedRoom == null) {
-            System.out.println();
-            System.out.println(".. But there's nothing in that direction");
+                System.out.println();
+                System.out.println(".. But there's nothing in that direction");
         } else if (!requestedRoom.isVisited()) {
+                int currentHealth = player.getHealth();
                 System.out.println("You move forward through the keep");
-            requestedRoom.setVisited();
-            map.setCurrentRoom(requestedRoom);
-            System.out.println(map.getCurrentRoom().getRoomDesc());
-        } else {
-            map.setCurrentRoom(requestedRoom);
-            System.out.println("You return to " + map.getCurrentRoom().getRoomName());
-        }
+                requestedRoom.setVisited();
+                map.setCurrentRoom(requestedRoom);
+                System.out.println(map.getCurrentRoom().getRoomDesc());
+                player.setHealth(currentHealth - 1);
+                System.out.println( "The way through the ruins is tiring ");
+                System.out.println("You have " + player.getHealth() + " health points.");
+            } else {
+                int currentHealth = player.getHealth();
+                map.setCurrentRoom(requestedRoom);
+                player.setHealth(currentHealth - 1);
+                System.out.println( "The way through the ruins is tiring ");
+                System.out.println("You have " + player.getHealth() + " health points.");
+                System.out.println("You return to " + map.getCurrentRoom().getRoomName());
+           }
 
     }
     }

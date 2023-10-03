@@ -7,7 +7,7 @@ public class Food extends Item{
 
     public Food(String itemName, String itemDescription, int healthMod, String effect) {
         super(itemName, itemDescription);
-        this.healthMod = Math.min(5, healthMod);
+        this.healthMod = healthMod;
         this.effect = effect;
     }
 
@@ -17,6 +17,5 @@ public class Food extends Item{
 
     public int getHealthMod() {
         return healthMod;
-
     }
 }

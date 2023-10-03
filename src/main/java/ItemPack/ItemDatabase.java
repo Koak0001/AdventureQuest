@@ -24,7 +24,7 @@ public class ItemDatabase {
         items.add(new Food("Crispy Bacon", "Crisp strips of bacon cooked to perfection.", 2, "Salty and satisfying."));
         items.add(new Food("Golden Honey Mead", "A golden, sweet mead in a polished wooden tankard.", 3, "Rich and honey-sweet."));
         items.add(new Food("Roasted Chestnuts", "Warm and roasted chestnuts, seasoned with a hint of salt.", 1, "Nutty and comforting."));
-        items.add(new Food("Sour Apple", "A tart green apple with a crisp bite.", 1, "Refreshing and tangy."));
+        items.add(new Food("Delicious Apple", "A juicy red apple.", -10, "A cursed apple! It turns to spiders and maggots in  your mouth."));
         items.add(new Food("Sizzling Sausage", "A sizzling hot sausage with a smoky aroma.", 2, "Juicy and flavorful."));
         items.add(new Food("Velvety Chocolate Truffle", "A decadent chocolate truffle with a silky smooth texture.", 3, "Indulgently rich and sweet."));
         items.add(new Food("Refreshing Lemonade", "A glass of ice-cold lemonade with a citrusy zing.", 2, "Cool and invigorating."));
