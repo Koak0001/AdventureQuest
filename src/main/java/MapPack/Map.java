@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Map {
     private Room currentRoom;
-    private Room requestRoom;
     private ArrayList<Item> items;
     public Map() {
         initializeMap();
@@ -96,6 +95,25 @@ public class Map {
         room2.addItem(food8);
         Item potion2 = itemDatabase.items.get(17);
         room1.addItem(potion2);
+
+        Item potion3 = itemDatabase.items.get(18);
+        room1.addItem(potion3);
+        Item potion4 = itemDatabase.items.get(19);
+        room2.addItem(potion4);
+        Item potion5 = itemDatabase.items.get(20);
+        room3.addItem(potion5);
+        Item potion6 =  itemDatabase.items.get(21);
+        room9.addItem(potion6);
+        Item potion7 = itemDatabase.items.get(22);
+        room8.addItem(potion7);
+        Item potion8 = itemDatabase.items.get(23);
+        room4.addItem(potion8);
+        Item potion9 = itemDatabase.items.get(24);
+        room6.addItem(potion9);
+        Item potion10 = itemDatabase.items.get(25);
+        room2.addItem(potion10);
+        Item potion11 = itemDatabase.items.get(26);
+        room1.addItem(potion11);
 
 
     }
