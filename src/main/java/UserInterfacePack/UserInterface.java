@@ -24,7 +24,6 @@ public class UserInterface {
 
         play();
     }
-
     public void play() {
         adventure.newGame();
         // player.newPlayer();
@@ -94,7 +93,7 @@ public class UserInterface {
                 } if (inputTokens[0].equals("drop") || inputTokens[0].equals("leave") || inputTokens[0].equals("dump")) {
                     takeOrDropItem(itemName);
                 } if (inputTokens[0].equals("eat") ||inputTokens[0].equals("drink") ){
-                    eatFood(itemName);
+                    eatOrDrink(itemName);
                 }
             } else if (!validCommandProcessed) {
                 System.out.println("Unknown input");
@@ -128,7 +127,7 @@ public class UserInterface {
         public void displayHealth() {
             System.out.println("You have " + player.getHealth() + " health points.");
             if (player.getHealth() >0 && player.getHealth() <= 25){
-                System.out.println("You are severely wounded, you should rest and tend to your wounds");
+                System.out.println("You are gravely wounded, you should rest and tend to your wounds");
             }
             if (player.getHealth() >25 && player.getHealth() <= 50){
                 System.out.println("You are injured, be wary");
@@ -193,51 +192,31 @@ public class UserInterface {
             }
         }
     }
-    public void eatFood(String itemName) {
-        boolean foundFood = false;
-
-        // Iterate through the player's inventory
+       public void eatOrDrink(String itemName) {
+        boolean rations = false;
         for (Item item : player.getInventory()) {
-            if (item instanceof Food) {
-                Food food = (Food) item;
-                String foodName = food.getItemName().toLowerCase().replaceAll("\\s+", "");
+            if (!(item instanceof Weapon)){
+                Item ration = item;
+                String rationName = ration.getItemName().toLowerCase().replaceAll("\\s+", "");
 
-                if (foodName.contains(itemName.replaceAll("\\s+", ""))) {
+                if (rationName.contains(itemName.replaceAll("\\s+", ""))) {
                     int currentHealth = player.getHealth();
-                    int healthMod = food.getHealthMod();
+                    int healthMod = ration.getHealthMod();
 
-                    System.out.println("You consume " + food.getItemName() + "\nIt is " + food.getEffect());
+                    System.out.println("You consume " + ration.getItemName() + "\nIt is " + ration.getEffect());
                     player.setHealth(currentHealth + healthMod);
                     System.out.println(player.getHealth());
-                    player.getInventory().remove(food); // Remove the consumed food
-                    foundFood = true;
-                    break; // Exit the loop once food is found and consumed
+                    player.getInventory().remove(ration);
+                    rations = true;
+                    gameOverCheck();
+                    break;
                 }
             }
         }
-
-        if (!foundFood) {
+        if (!rations) {
             System.out.println("Item not found in your inventory or not edible.");
         }
     }
-//        public void removeItemFromInventory (String itemName){
-//        Room currentRoom = player.getPlayerLocation();
-//        itemName = itemName.trim().toLowerCase();
-//        Item item = null;
-//        for (Item inventoryItem : player.getInventory()) {
-//            if (inventoryItem.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
-//                item = inventoryItem;
-//                break;
-//            }
-//        }
-//            if (item != null) {
-//                player.getInventory().remove(item);
-//                currentRoom.addItem(item);
-//                System.out.println("You dropped " + item.getItemName());
-//            } else {
-//                System.out.println("Item not found in inventory.");
-//            }
-//        }
         public void moveTo(Room requestedRoom) {
             if (requestedRoom == null) {
                 System.out.println("There's nothing in that direction");
@@ -260,7 +239,5 @@ public class UserInterface {
             System.out.println(player.getPlayerLocation().getRoomName());
             gameOverCheck();
     }
-
-
 }
 

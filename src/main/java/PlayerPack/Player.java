@@ -47,6 +47,7 @@ public class Player {
     }
     public void setHealth(int health) {
     this.health = Math.min(100, health);
+
     }
 
 }
