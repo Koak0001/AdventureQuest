@@ -18,4 +18,12 @@ public class Food extends Item{
     public int getHealthMod() {
         return healthMod;
     }
+    @Override
+    public String getItemName() {
+        String superItemName = super.getItemName();
+        if (superItemName.startsWith("The ")) {
+            superItemName = superItemName.substring(4); // Remove "The " prefix
+        }
+        return "a " + superItemName;
+    }
 }

@@ -12,7 +12,7 @@ public class Item {
     }
 
     public String getItemName() {
-        return itemName;
+        return "The " + itemName;
     }
 
     public String getItemDescription() {

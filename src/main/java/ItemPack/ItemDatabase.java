@@ -7,7 +7,7 @@ public class ItemDatabase {
 
     public ItemDatabase() {
 
-        items.add(new Item("Frostbite Blade\n", "A finely-crafted longsword with an icy blue hilt. \nIts blade, etched with frost patterns, feels unnaturally cold to the touch."));
+        items.add(new Item("Frostbite Sword\n", "A finely-crafted longsword with an icy blue hilt. \nIts blade, etched with frost patterns, feels unnaturally cold to the touch."));
         items.add(new Item("Shadow-cloak of the Whispering Night\n ", "A hooded cloak that seems to absorb light. \nWhen worn, it grants the ability to move silently and blend into shadows."));
         items.add(new Item("Crimson Elixir\n", "A small vial containing a red potion with a swirling, misty interior. \nWhen consumed, it grants temporary invulnerability to fire."));
         items.add(new Item("Aerial Dagger\n", "A slender, translucent dagger with an ethereal glow. \nIt can bypass physical defenses and phase through armor."));
@@ -18,16 +18,16 @@ public class ItemDatabase {
         items.add(new Item("Echoing Blade of Shadows\n", "A wickedly curved short sword with an ebony hilt. \nIt has the power to summon shadowy duplicates of the wielder to confuse and disorient foes."));
 
     //Food Items: Starts with int[9] for stew.
-        items.add(new Food("Hearty Stew", "A bowl of hearty stew, packed with chunks of meat and vegetables.", 3, "Savory and filling."));
-        items.add(new Food("Sweetberry Pie", "A freshly baked pie with a sweet berry filling.", 2, "Deliciously sweet and tangy."));
-        items.add(new Food("Spicy Curry", "A plate of spicy curry with fragrant spices and tender meat.", 4, "Fiery and flavorful."));
-        items.add(new Food("Crispy Bacon", "Crisp strips of bacon cooked to perfection.", 2, "Salty and satisfying."));
-        items.add(new Food("Golden Honey Mead", "A golden, sweet mead in a polished wooden tankard.", 3, "Rich and honey-sweet."));
-        items.add(new Food("Roasted Chestnuts", "Warm and roasted chestnuts, seasoned with a hint of salt.", 1, "Nutty and comforting."));
-        items.add(new Food("Delicious Apple", "A juicy red apple.", -10, "A cursed apple! It turns to spiders and maggots in  your mouth."));
-        items.add(new Food("Sizzling Sausage", "A sizzling hot sausage with a smoky aroma.", 2, "Juicy and flavorful."));
-        items.add(new Food("Velvety Chocolate Truffle", "A decadent chocolate truffle with a silky smooth texture.", 3, "Indulgently rich and sweet."));
-        items.add(new Food("Refreshing Lemonade", "A glass of ice-cold lemonade with a citrusy zing.", 2, "Cool and invigorating."));
+        items.add(new Food("Hearty Stew", "a bowl of hearty stew, packed with chunks of meat and vegetables.", 3, "savory and filling."));
+        items.add(new Food("Sweetberry Pie", "a freshly baked pie with a sweet berry filling.", 2, "deliciously sweet and tangy."));
+        items.add(new Food("Spicy Curry", "a plate of spicy curry with fragrant spices and tender meat.", 4, "fiery and flavorful."));
+        items.add(new Food("Crispy Bacon", "crisp strips of bacon cooked to perfection.", 2, "salty and satisfying."));
+        items.add(new Food("Golden Honey Mead", "a golden, sweet mead in a polished wooden tankard.", 3, "rich and honey-sweet."));
+        items.add(new Food("Roasted Chestnuts", "warm and roasted chestnuts, seasoned with a hint of salt.", 1, "nutty and comforting."));
+        items.add(new Food("Delicious Apple", "a juicy red apple.", -99, "a cursed apple! It turns to spiders and maggots in  your mouth."));
+        items.add(new Food("Sizzling Sausage", "a sizzling hot sausage with a smoky aroma.", 2, "juicy and flavorful."));
+        items.add(new Food("Velvety Chocolate Truffle", "a decadent chocolate truffle with a silky smooth texture.", 3, "indulgently rich and sweet."));
+        items.add(new Food("Refreshing Lemonade", "a glass of ice-cold lemonade with a citrusy zing.", 2, "cool and invigorating."));
 
     }
 }
