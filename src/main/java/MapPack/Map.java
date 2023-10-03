@@ -1,7 +1,5 @@
 package MapPack;
-import ItemPack.Food;
-import ItemPack.Item;
-import ItemPack.ItemDatabase;
+import ItemPack.*;
 import RoomPack.Room;
 
 import java.util.ArrayList;
@@ -14,8 +12,8 @@ public class Map {
         initializeMap();
     }
     private void initializeMap() {
-        ItemDatabase itemDatabase = new ItemDatabase(); // Initialize your item database
-        items = new ArrayList<>(); // Initialize the ArrayList to store items in rooms
+        ItemDatabase itemDatabase = new ItemDatabase();
+        items = new ArrayList<>();
 
 
         // Room overview
@@ -80,24 +78,24 @@ public class Map {
         room5.addItem(item9);
 
         //Food
-        Food food1 = (Food) itemDatabase.items.get(9);
+        Item food1 = itemDatabase.items.get(9);
         room1.addItem(food1);
-        Food food2 = (Food) itemDatabase.items.get(10);
+        Item food2 = itemDatabase.items.get(10);
         room2.addItem(food2);
-        Food food3 = (Food) itemDatabase.items.get(11);
+        Item food3 = itemDatabase.items.get(11);
         room3.addItem(food3);
-        Food food4 = (Food) itemDatabase.items.get(12);
+        Item food4 =  itemDatabase.items.get(12);
         room9.addItem(food4);
-        Food food5 = (Food) itemDatabase.items.get(13);
-        room9.addItem(food5);
-        Food food6 = (Food) itemDatabase.items.get(14);
+        Item potion1 = itemDatabase.items.get(13);
+        room9.addItem(potion1);
+        Item food6 = itemDatabase.items.get(14);
         room7.addItem(food6);
-        Food food7 = (Food) itemDatabase.items.get(15);
+        Item food7 = itemDatabase.items.get(15);
         room1.addItem(food7);
-        Food food8 = (Food) itemDatabase.items.get(16);
+        Item food8 = itemDatabase.items.get(16);
         room2.addItem(food8);
-        Food food9 = (Food) itemDatabase.items.get(17);
-        room1.addItem(food9);
+        Item potion2 = itemDatabase.items.get(17);
+        room1.addItem(potion2);
 
 
     }
@@ -109,13 +107,6 @@ public class Map {
     public Room getCurrentRoom() {
         return currentRoom;}
 
-    public void setRequestRoom(Room requestRoom) {
-        this.requestRoom = requestRoom;
-    }
-
-    public Room getRequestRoom() {
-        return requestRoom;
-    }
 }
 
 

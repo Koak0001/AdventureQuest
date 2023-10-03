@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Player {
     private final Map map;
+    private Room requestRoom;
     private Room playerLocation;
     private int health;
     public List<Item> inventory;
@@ -23,6 +24,16 @@ public class Player {
         this.playerLocation = playerLocation;
     }
 
+    public Room getPlayerLocation(){
+        return playerLocation;
+    }
+    public void setRequestRoom(Room requestRoom) {
+        this.requestRoom = requestRoom;
+    }
+
+    public Room getRequestRoom() {
+        return requestRoom;
+    }
     public List<Item> getInventory() {
         return inventory;
     }
@@ -37,6 +48,7 @@ public class Player {
     public void setHealth(int health) {
     this.health = Math.min(100, health);
     }
+
 }
 
 

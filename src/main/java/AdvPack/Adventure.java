@@ -2,6 +2,7 @@ package AdvPack;
 import MapPack.Map;
 import PlayerPack.Player;
 
+
 public class Adventure {
     private Map map;
     private Player player;

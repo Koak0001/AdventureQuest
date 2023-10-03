@@ -1,11 +1,11 @@
 package ItemPack;
-public class Food extends Item{
+public class Potion extends Item{
     private final int healthMod;
     private final String effect;
 
 
-    public Food(String itemName, String itemDescription, int healthMod, String effect) {
-        super(itemName, itemDescription, ItemType.FOOD);
+    public Potion(String itemName, String itemDescription, int healthMod, String effect) {
+        super(itemName, itemDescription, ItemType.POTION);
         this.healthMod = healthMod;
         this.effect = effect;
     }

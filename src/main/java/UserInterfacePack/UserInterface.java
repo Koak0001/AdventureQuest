@@ -1,8 +1,9 @@
 package UserInterfacePack;
-
+import ItemPack.ItemDatabase;
 import AdvPack.Adventure;
 import ItemPack.Item;
 import ItemPack.Food;
+import ItemPack.Potion;
 import MapPack.Map;
 import PlayerPack.Player;
 import RoomPack.Room;
@@ -14,12 +15,14 @@ public class UserInterface {
     public Adventure adventure;
     public Player player;
     public Map map;
+    public ItemDatabase itemDatabase;
 
 
     public UserInterface(Adventure adventure) {
         this.adventure = adventure;
         this.map = new Map();
         this.player = new Player(map);
+        this.itemDatabase = new ItemDatabase();
         player.setHealth(100);
 
         play();
@@ -31,6 +34,7 @@ public class UserInterface {
         Scanner keyboard = new Scanner(System.in);
         boolean exit = false;
         System.out.println("Welcome to the game you are standing in " + map.getCurrentRoom().getRoomName() + map.getCurrentRoom().getRoomDesc());
+        player.getPlayerLocation().setVisited();
         System.out.println("Start by going south or east ");
         System.out.println("Type help for help");
         while (!exit) {
@@ -40,23 +44,23 @@ public class UserInterface {
             boolean validCommandProcessed = false;
             switch (input) {
                 case "north", "n" -> {
-                    map.setRequestRoom(map.getCurrentRoom().getNorthRoom());
-                    moveTo(map.getRequestRoom());
+                    player.setRequestRoom(player.getPlayerLocation().getNorthRoom());
+                    moveTo(player.getRequestRoom());
                     validCommandProcessed = true;
                 }
                 case "south", "s" -> {
-                    map.setRequestRoom(map.getCurrentRoom().getSouthRoom());
-                    moveTo(map.getRequestRoom());
+                    player.setRequestRoom(player.getPlayerLocation().getSouthRoom());
+                    moveTo(player.getRequestRoom());
                     validCommandProcessed = true;
                 }
                 case "west", "w" -> {
-                    map.setRequestRoom(map.getCurrentRoom().getWestRoom());
-                    moveTo(map.getRequestRoom());
+                    player.setRequestRoom(player.getPlayerLocation().getWestRoom());
+                    moveTo(player.getRequestRoom());
                     validCommandProcessed = true;
                 }
                 case "east", "e" -> {
-                    map.setRequestRoom(map.getCurrentRoom().getEastRoom());
-                    moveTo(map.getRequestRoom());
+                    player.setRequestRoom(player.getPlayerLocation().getEastRoom());
+                    moveTo(player.getRequestRoom());
                     validCommandProcessed = true;
                 }
                 case "help" -> {
@@ -93,9 +97,6 @@ public class UserInterface {
             }
         }
     }
-
-
-        // Help Method
         public void help () {
             System.out.println("You are standing in " + map.getCurrentRoom().getRoomName());
             System.out.println("In this game you may move in 4 directions");
@@ -108,21 +109,18 @@ public class UserInterface {
             System.out.println("And use 'eat' and 'drink' for food and drinks");
             System.out.println("Type exit to exit the game");
         }
-
-        // Look Method
         public void look () {
-            System.out.println("You are standing in " + map.getCurrentRoom().getRoomName() + map.getCurrentRoom().getRoomDesc());
+            System.out.println("You are standing in " + player.getPlayerLocation().getRoomName() + player.getPlayerLocation().getRoomDesc());
             System.out.println("Look around, you see a paths leading ");
-             if (map.getCurrentRoom().northRoom != null){
+             if (player.getPlayerLocation().northRoom != null){
                  System.out.println("North");
-             }if (map.getCurrentRoom().eastRoom != null){
+             }if (player.getPlayerLocation().eastRoom != null){
                  System.out.println("East");
-             }if (map.getCurrentRoom().southRoom != null){
+             }if (player.getPlayerLocation().southRoom != null){
                  System.out.println("South");
-             }if (map.getCurrentRoom().westRoom != null){
-                 System.out.println("West");
-             }
-        }
+             }if (player.getPlayerLocation().westRoom != null){
+                 System.out.println("West");}
+            }
         public void displayHealth() {
             System.out.println("You have " + player.getHealth() + " health points.");
             if (player.getHealth() >0 && player.getHealth() <= 25){
@@ -142,9 +140,8 @@ public class UserInterface {
             System.out.println("Death comes for us all.");
             System.out.println("Game Over!");
             System.exit(0);}
-        if (player.getHealth() == 100){
-            System.out.println("You are sated and at full health");
-        }
+        if (player.getHealth() == 100)
+        {System.out.println("You are sated and at full health");}
         }
         public void search () {
             System.out.println("You search the room for treasures.");
@@ -152,12 +149,10 @@ public class UserInterface {
             List<Item> itemsInRoom = map.getCurrentRoom().getItems();
             if (itemsInRoom != null && !itemsInRoom.isEmpty()) {
                 for (Item item : itemsInRoom) {
-                    System.out.println("You find " + item.getItemName());
-                }
+                    System.out.println("You find " + item.getItemName());}
             } else {
-                System.out.println("This room is void food or treasures");
-            }
-        }
+                System.out.println("This room is void food or treasures");}
+                }
         public void displayInventory () {
             System.out.println("You search your bag... ");
             if (player.inventory.isEmpty()) {
@@ -165,12 +160,11 @@ public class UserInterface {
             } else {
                 System.out.println(".. And find its contents within. Just as you left them: ");
                 for (Item item : player.inventory) {
-                    System.out.println( item.getItemName() + "\n" + item.getItemDescription());
-                }
+                    System.out.println(item.getItemName() + " \n" + item.getItemDescription());}
+                 }
             }
-        }
         public void takeItemFromRoom (String itemName){
-            Room currentRoom = map.getCurrentRoom();
+            Room currentRoom = player.getPlayerLocation();
             itemName = itemName.trim().toLowerCase();
             Item foundItem = null;
             for (Item item : currentRoom.getItems()) {
@@ -188,12 +182,12 @@ public class UserInterface {
             }
         }
     public void eatFood(String itemName) {
-        Room currentRoom = map.getCurrentRoom();
+        Room currentRoom = player.getPlayerLocation();
         itemName = itemName.trim().toLowerCase();
         Item foodToEat = null;
-        for (Item item : player.getInventory()) {
-            if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
-                foodToEat = item;
+        for (Item food : player.getInventory()) {
+            if (food.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
+                foodToEat = food;
                 break;
             }
         }
@@ -216,7 +210,7 @@ public class UserInterface {
     }
 
         public void removeItemFromInventory (String itemName){
-        Room currentRoom = map.getCurrentRoom();
+        Room currentRoom = player.getPlayerLocation();
         itemName = itemName.trim().toLowerCase();
         Item item = null;
         for (Item inventoryItem : player.getInventory()) {
@@ -242,19 +236,21 @@ public class UserInterface {
                 int currentHealth = player.getHealth();
                 System.out.println("You move forward through the keep");
                 requestedRoom.setVisited();
-                map.setCurrentRoom(requestedRoom);
-                System.out.println(map.getCurrentRoom().getRoomDesc());
+                player.setPlayerLocation(requestedRoom);
+                System.out.println(player.getPlayerLocation().getRoomDesc());
                 player.setHealth(currentHealth - 1);
                 System.out.println( "The way through the ruins is tiring ");
                 System.out.println("You have " + player.getHealth() + " health points.");
+                map.setCurrentRoom(player.getPlayerLocation());
                 gameOverCheck();
             } else {
                 int currentHealth = player.getHealth();
-                map.setCurrentRoom(requestedRoom);
+                player.setPlayerLocation(requestedRoom);
                 player.setHealth(currentHealth - 1);
                 System.out.println( "The way through the ruins is tiring ");
                 System.out.println("You have " + player.getHealth() + " health points.");
-                System.out.println("You return to " + map.getCurrentRoom().getRoomName());
+                System.out.println("You return to " + player.getPlayerLocation().getRoomName());
+                map.setCurrentRoom(player.getPlayerLocation());
                 gameOverCheck();
            }
     }
