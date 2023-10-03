@@ -36,7 +36,7 @@ public class UserInterface {
         System.out.println("Type help for help");
         while (!exit) {
             String userInput = keyboard.nextLine().toLowerCase();
-            String input = userInput.replace("go ", "").replace("around", "").replace("for", "").replace("move", "go").replace("display","").replace("\\s+", " ").replace("room","").replace("I","").replace("show", "").replace("the", "").trim();
+            String input = userInput.replace("go", "").replace("around", "").replace("for", "").replace("move", "").replace("display","").replace("\\s+", " ").replace("room","").replace("I","").replace("show", "").replace("the", "").trim();
             String[] inputTokens = input.split("\\s+", 2);
             boolean validCommandProcessed = false;
             Room targetRoom = null; // Initialize targetRoom to null
@@ -79,20 +79,20 @@ public class UserInterface {
                     validCommandProcessed = true;
                 }
             }
-
-            if (targetRoom != null) {
+            if ((inputTokens[0].equals("north") || inputTokens[0].equals("south") || inputTokens[0].equals("east") || inputTokens[0].equals("west")) && targetRoom == null) {
+                System.out.println("There's nothing that way");
+                validCommandProcessed = true;
+            } else if (targetRoom != null) {
                 player.setRequestRoom(targetRoom);
                 moveTo(player.getRequestRoom());
                 validCommandProcessed = true;
-            }
-
-
+                }
             if (!validCommandProcessed && inputTokens.length == 2) {
                 String itemName = inputTokens[1].toLowerCase().trim();
                 if (inputTokens[0].equals("take") || inputTokens[0].equals("grab") || inputTokens[0].equals("pickup")) {
-                    takeItemFromRoom(itemName);
+                    takeOrDropItem(itemName);
                 } if (inputTokens[0].equals("drop") || inputTokens[0].equals("leave") || inputTokens[0].equals("dump")) {
-                    removeItemFromInventory(itemName);
+                    takeOrDropItem(itemName);
                 } if (inputTokens[0].equals("eat") ||inputTokens[0].equals("drink") ){
                     eatFood(itemName);
                 }
@@ -167,9 +167,9 @@ public class UserInterface {
                     System.out.println(item.getItemName() + " \n" + item.getItemDescription());}
                  }
             }
-        public void takeItemFromRoom (String itemName){
+        public void takeOrDropItem (String itemName) {
             Room currentRoom = player.getPlayerLocation();
-            itemName = itemName.trim().toLowerCase();
+            itemName = itemName;
             Item foundItem = null;
             for (Item item : currentRoom.getItems()) {
                 if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
@@ -178,13 +178,21 @@ public class UserInterface {
                 }
             }
             if (foundItem != null) {
-                player.getInventory().add(foundItem);
+                player.inventory.add(foundItem);
                 currentRoom.getItems().remove(foundItem);
                 System.out.println("You picked up " + foundItem.getItemName() + " \n" + foundItem.getItemDescription());
-            } else {
-                System.out.println("Item not found in the room.");
+            } else{
+                for (Item item : player.inventory) {
+                    if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
+                        foundItem = item;
+                        currentRoom.addItem(foundItem);
+                        player.inventory.remove(foundItem);
+                        System.out.println("You dropped " + foundItem.getItemName());
+                        break;
+                }
             }
         }
+    }
     public void eatFood(String itemName) {
         boolean foundFood = false;
 
@@ -212,24 +220,24 @@ public class UserInterface {
             System.out.println("Item not found in your inventory or not edible.");
         }
     }
-        public void removeItemFromInventory (String itemName){
-        Room currentRoom = player.getPlayerLocation();
-        itemName = itemName.trim().toLowerCase();
-        Item item = null;
-        for (Item inventoryItem : player.getInventory()) {
-            if (inventoryItem.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
-                item = inventoryItem;
-                break;
-            }
-        }
-            if (item != null) {
-                player.getInventory().remove(item);
-                currentRoom.addItem(item);
-                System.out.println("You dropped " + item.getItemName());
-            } else {
-                System.out.println("Item not found in inventory.");
-            }
-        }
+//        public void removeItemFromInventory (String itemName){
+//        Room currentRoom = player.getPlayerLocation();
+//        itemName = itemName.trim().toLowerCase();
+//        Item item = null;
+//        for (Item inventoryItem : player.getInventory()) {
+//            if (inventoryItem.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
+//                item = inventoryItem;
+//                break;
+//            }
+//        }
+//            if (item != null) {
+//                player.getInventory().remove(item);
+//                currentRoom.addItem(item);
+//                System.out.println("You dropped " + item.getItemName());
+//            } else {
+//                System.out.println("Item not found in inventory.");
+//            }
+//        }
         public void moveTo(Room requestedRoom) {
             if (requestedRoom == null) {
                 System.out.println("There's nothing in that direction");
@@ -237,20 +245,19 @@ public class UserInterface {
                 requestedRoom.setVisited();
                 player.setPlayerLocation(requestedRoom);
                 moveTax();
-                System.out.println(player.getPlayerLocation().getRoomName());
                 System.out.println(player.getPlayerLocation().getRoomDesc());
             } else {
                 player.setPlayerLocation(requestedRoom);
                 moveTax();
-                System.out.println(player.getPlayerLocation().getRoomName());
             }
-    }
+        }
         public void moveTax() {
             int currentHealth = player.getHealth();
             map.setCurrentRoom(player.getPlayerLocation());
             System.out.println( "The way through the ruins is a gruelling task ");
             player.setHealth(currentHealth - 1)
             ;System.out.println("You have " + player.getHealth() + " health points.");
+            System.out.println(player.getPlayerLocation().getRoomName());
             gameOverCheck();
     }
 
