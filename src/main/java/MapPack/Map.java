@@ -1,4 +1,5 @@
 package MapPack;
+import ItemPack.Food;
 import ItemPack.Item;
 import ItemPack.ItemDatabase;
 import RoomPack.Room;
@@ -77,6 +78,28 @@ public class Map {
         room5.addItem(item8);
         Item item9 = itemDatabase.items.get(8);
         room5.addItem(item9);
+
+        //Food
+        Food food1 = (Food) itemDatabase.items.get(9);
+        room1.addItem(food1);
+        Food food2 = (Food) itemDatabase.items.get(10);
+        room2.addItem(food2);
+        Food food3 = (Food) itemDatabase.items.get(11);
+        room3.addItem(food3);
+        Food food4 = (Food) itemDatabase.items.get(12);
+        room9.addItem(food4);
+        Food food5 = (Food) itemDatabase.items.get(13);
+        room9.addItem(food5);
+        Food food6 = (Food) itemDatabase.items.get(14);
+        room7.addItem(food6);
+        Food food7 = (Food) itemDatabase.items.get(15);
+        room7.addItem(food7);
+        Food food8 = (Food) itemDatabase.items.get(16);
+        room2.addItem(food8);
+        Food food9 = (Food) itemDatabase.items.get(17);
+        room1.addItem(food9);
+
+
     }
 
     // Getter for the current room

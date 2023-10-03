@@ -2,6 +2,7 @@ package UserInterfacePack;
 
 import AdvPack.Adventure;
 import ItemPack.Item;
+import ItemPack.Food;
 import MapPack.Map;
 import PlayerPack.Player;
 import RoomPack.Room;
@@ -81,6 +82,8 @@ public class UserInterface {
                     takeItemFromRoom(itemName);
                 } if (inputTokens[0].equals("drop") || inputTokens[0].equals("leave") || inputTokens[0].equals("dump")) {
                     removeItemFromInventory(itemName);
+                } if (inputTokens[0].equals("eat") ||inputTokens[0].equals("drink") ){
+                    eatFood(itemName);
                 }
             } else if (!validCommandProcessed) {
                 System.out.println("Unknown input");
@@ -147,17 +150,39 @@ public class UserInterface {
                 System.out.println("Item not found in the room.");
             }
         }
+    public void eatFood(String itemName) {
+        Room currentRoom = map.getCurrentRoom();
+        itemName = itemName.trim().toLowerCase();
+        Item itemToRemove = null;
 
-        public void removeItemFromInventory (String itemName){
-            Room currentRoom = map.getCurrentRoom();
-            itemName = itemName.trim().toLowerCase();
-            Item item = null;
-            for (Item inventoryItem : player.getInventory()) {
-                if (inventoryItem.getItemName().toLowerCase().replaceAll("\\s+", "").equals(itemName.replaceAll("\\s+", ""))) {
-                    item = inventoryItem;
-                    break;
-                }
+        for (Item item : player.getInventory()) {
+            if (item.getItemName().toLowerCase().replaceAll("\\s+", "").equals(itemName.replaceAll("\\s+", ""))) {
+                itemToRemove = item;
+                break;
             }
+        }
+        if (itemToRemove != null) {
+            if (itemToRemove instanceof Food) {
+                Food food = (Food) itemToRemove; // Cast to Food
+                System.out.println(food.getEffect());
+            } else {
+                System.out.println("This item is not food.");
+            }
+            player.getInventory().remove(itemToRemove);
+        } else {
+            System.out.println("Item not found in your inventory.");
+        }
+    }
+        public void removeItemFromInventory (String itemName){
+        Room currentRoom = map.getCurrentRoom();
+        itemName = itemName.trim().toLowerCase();
+        Item item = null;
+        for (Item inventoryItem : player.getInventory()) {
+            if (inventoryItem.getItemName().toLowerCase().replaceAll("\\s+", "").equals(itemName.replaceAll("\\s+", ""))) {
+                item = inventoryItem;
+                break;
+            }
+        }
             if (item != null) {
                 player.getInventory().remove(item);
                 currentRoom.addItem(item);

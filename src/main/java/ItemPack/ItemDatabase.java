@@ -17,7 +17,7 @@ public class ItemDatabase {
         items.add(new Item("Elixir of Time's Embrace\n", "A delicate glass flask containing a shimmering potion. \nWhen consumed, it grants the drinker a brief glimpse into the future, allowing them to foresee impending danger."));
         items.add(new Item("Echoing Blade of Shadows\n", "A wickedly curved short sword with an ebony hilt. \nIt has the power to summon shadowy duplicates of the wielder to confuse and disorient foes."));
 
-    //Food Items:
+    //Food Items: Starts with int[9] for stew.
         items.add(new Food("Hearty Stew", "A bowl of hearty stew, packed with chunks of meat and vegetables.", 3, "Savory and filling."));
         items.add(new Food("Sweetberry Pie", "A freshly baked pie with a sweet berry filling.", 2, "Deliciously sweet and tangy."));
         items.add(new Food("Spicy Curry", "A plate of spicy curry with fragrant spices and tender meat.", 4, "Fiery and flavorful."));
