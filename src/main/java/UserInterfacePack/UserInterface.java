@@ -1,5 +1,7 @@
 package UserInterfacePack;
 import ItemPack.*;
+import ItemPack.ItemType;
+import ItemPack.FoodType;
 import AdvPack.Adventure;
 import MapPack.Map;
 import PlayerPack.Player;
@@ -8,6 +10,9 @@ import RoomPack.Room;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static ItemPack.FoodType.FOOD;
+import static ItemPack.FoodType.POTION;
 
 public class UserInterface {
     public Adventure adventure;
@@ -207,8 +212,8 @@ public class UserInterface {
        public void eatOrDrink(String itemName, boolean isEating) {
            boolean rations = false;
            for (Item item : player.getInventory()) {
-               if ((isEating && item instanceof Food) ||
-                       (!isEating && item instanceof Potion)) {
+               if (isEating && item.getItemType().equals(ItemType.FOOD) && item.getFoodType().equals(FoodType.FOOD)
+                   || (!isEating && item.getItemType().equals(ItemType.FOOD) && item.getFoodType().equals(POTION))) {
                    Item ration = item;
                    String rationName = ration.getItemName().toLowerCase().replaceAll("\\s+", "");
 

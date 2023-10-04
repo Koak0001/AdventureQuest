@@ -1,14 +1,17 @@
 package ItemPack;
-public class Food extends Item{
+
+import static ItemPack.ItemType.FOOD;
+
+public class Food extends Item {
     private final int healthMod;
     private final String effect;
 
-
-    public Food(String itemName, String itemDescription, int healthMod, String effect) {
-        super(itemName, itemDescription, ItemType.FOOD);
+    public Food(String itemName, String itemDescription, int healthMod, String effect, FoodType foodType) {
+        super(itemName, itemDescription, ItemType.FOOD, foodType, null);
         this.healthMod = healthMod;
         this.effect = effect;
     }
+
     @Override
     public String getItemName() {
         String superItemName = super.getItemName();
@@ -26,4 +29,7 @@ public class Food extends Item{
         return healthMod;
     }
 
+    public FoodType getFoodType() {
+        return FoodType.FOOD;
+    }
 }
