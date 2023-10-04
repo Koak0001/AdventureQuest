@@ -47,7 +47,7 @@ public class UserInterface {
             .trim();
             String input = userInput;
             String[] inputTokens = userInput.split("\\s+", 2);
-
+//            InputTokens results, for debugging purposes.
 //            System.out.println("Input: " + userInput);
 //            System.out.println("InputTokens: " + Arrays.toString(inputTokens));
             boolean validCommandProcessed = false;
@@ -103,9 +103,9 @@ public class UserInterface {
                 } if (inputTokens[0].equals("drop") || inputTokens[0].equals("leave") || inputTokens[0].equals("dump")) {
                     takeOrDropItem(itemName);
                 } if (inputTokens[0].equals("eat")){
-                    boolean food = true; eatOrDrink(itemName);
-                } if (inputTokens[0].equals("eat") ||inputTokens[0].equals("drink") ){
-                    eatOrDrink(itemName);
+                    eatOrDrink(itemName, true);
+                } if (inputTokens[0].equals("drink") ){
+                    eatOrDrink(itemName, false);
                 }
             } else if (!validCommandProcessed) {
                 System.out.println("Invalid input");
@@ -204,31 +204,33 @@ public class UserInterface {
             }
         }
     }
-       public void eatOrDrink(String itemName) {
-        boolean rations = false;
-        for (Item item : player.getInventory()) {
-            if (!(item instanceof Weapon)){
-                Item ration = item;
-                String rationName = ration.getItemName().toLowerCase().replaceAll("\\s+", "");
+       public void eatOrDrink(String itemName, boolean isEating) {
+           boolean rations = false;
+           for (Item item : player.getInventory()) {
+               if ((isEating && item instanceof Food) ||
+                       (!isEating && item instanceof Potion)) {
+                   Item ration = item;
+                   String rationName = ration.getItemName().toLowerCase().replaceAll("\\s+", "");
 
-                if (rationName.contains(itemName.replaceAll("\\s+", ""))) {
-                    int currentHealth = player.getHealth();
-                    int healthMod = ration.getHealthMod();
+                       if (rationName.contains(itemName.replaceAll("\\s+", ""))) {
+                           int currentHealth = player.getHealth();
+                           int healthMod = ration.getHealthMod();
 
-                    System.out.println("You consume " + ration.getItemName() + "\nIt is " + ration.getEffect());
-                    player.setHealth(currentHealth + healthMod);
-                    System.out.println(player.getHealth());
-                    player.getInventory().remove(ration);
-                    rations = true;
-                    gameOverCheck();
-                    break;
-                }
-            }
-        }
-        if (!rations) {
-            System.out.println("Item not found in your inventory or not edible.");
-        }
-    }
+                           System.out.println("You consume " + ration.getItemName() + "\nIt is " + ration.getEffect());
+                           player.setHealth(currentHealth + healthMod);
+                           System.out.println(player.getHealth());
+                           player.getInventory().remove(ration);
+                           rations = true;
+                           gameOverCheck();
+                           break;
+                       }
+                   }
+               }
+               if (!rations) {
+                   System.out.println("Item not found in your inventory or not edible.");
+               }
+           }
+
         public void moveTo(Room requestedRoom) {
             if (requestedRoom == null) {
                 System.out.println("There's nothing in that direction");

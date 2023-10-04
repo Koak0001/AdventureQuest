@@ -88,7 +88,7 @@ public class Map {
         Item potion1 = itemDatabase.items.get(13);
         room9.addItem(potion1);
         Item food6 = itemDatabase.items.get(14);
-        room7.addItem(food6);
+        room1.addItem(food6);
         Item food7 = itemDatabase.items.get(15);
         room1.addItem(food7);
         Item food8 = itemDatabase.items.get(16);

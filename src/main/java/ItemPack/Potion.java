@@ -13,8 +13,14 @@ public class Potion extends Item{
     public String getItemName() {
         String superItemName = super.getItemName();
         if (superItemName.startsWith("The ")) {
-            superItemName = superItemName.substring(4); // Remove "The " prefix
+            superItemName = superItemName.substring(4); //Removes super class prefix
         }
-        return "a " + superItemName;
+        return "a " + superItemName;}
+    @Override
+    public String getEffect() {
+        return effect;}
+    @Override
+    public int getHealthMod() {
+        return healthMod;
     }
 }
