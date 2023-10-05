@@ -29,6 +29,7 @@ public class UserInterface {
 
         play();
     }
+
     public void play() {
         adventure.newGame();
         Scanner keyboard = new Scanner(System.in);
@@ -40,16 +41,16 @@ public class UserInterface {
         while (!exit) {
             String userInput = keyboard.nextLine().toLowerCase();
             userInput = userInput.replace("go", "")
-            .replace("around", "")
-            .replace("for", "")
-            .replace("move ", "")
-            .replace("display ", "")
-            .replace("\\s+", " ")
-            .replace("i ", " ")
-            .replace("room", "")
-            .replace("show ", "")
-            .replace("the", "")
-            .trim();
+                    .replace("around", "")
+                    .replace("for", "")
+                    .replace("move ", "")
+                    .replace("display ", "")
+                    .replace("\\s+", " ")
+                    .replace("i ", " ")
+                    .replace("room", "")
+                    .replace("show ", "")
+                    .replace("the", "")
+                    .trim();
             String input = userInput;
             String[] inputTokens = userInput.split("\\s+", 2);
 //            InputTokens results, for debugging purposes.
@@ -99,7 +100,7 @@ public class UserInterface {
                     displayHealth();
                     validCommandProcessed = true;
                 }
-                case "unequip" ->{
+                case "unequip" -> {
                     unEquipWeapon();
                     validCommandProcessed = true;
                 }
@@ -108,14 +109,18 @@ public class UserInterface {
 
                 String itemName = inputTokens[1].toLowerCase().trim();
                 if (inputTokens[0].equals("take") || inputTokens[0].equals("grab") || inputTokens[0].equals("pickup")) {
-                    takeOrDropItem(itemName);
-                } if (inputTokens[0].equals("drop") || inputTokens[0].equals("leave") || inputTokens[0].equals("dump")) {
-                    takeOrDropItem(itemName);
-                } if (inputTokens[0].equals("eat")){
+                    takeOrDropItem(itemName, false);
+                }
+                if (inputTokens[0].equals("drop") || inputTokens[0].equals("leave") || inputTokens[0].equals("dump")) {
+                    takeOrDropItem(itemName, true);
+                }
+                if (inputTokens[0].equals("eat")) {
                     eatOrDrink(itemName, true);
-                } if (inputTokens[0].equals("equip")){
-                    setEquippedWeapon(itemName);}
-                 if (inputTokens[0].equals("drink") ){
+                }
+                if (inputTokens[0].equals("equip")) {
+                    setEquippedWeapon(itemName);
+                }
+                if (inputTokens[0].equals("drink")) {
                     eatOrDrink(itemName, false);
                 }
             } else if (!validCommandProcessed) {
@@ -123,96 +128,125 @@ public class UserInterface {
             }
         }
     }
-        public void help () {
-            System.out.println("You are standing in " + map.getCurrentRoom().getRoomName());
-            System.out.println("In this game you may move in 4 directions");
-            System.out.println("North, South, East, West");
-            System.out.println("Type 'Look around' to see which directions you may move to");
-            System.out.println("'Search' to search the room.");
-            System.out.println("'Health', or 'Display Healthbar' to see current Health Points");
-            System.out.println("'Inventory' to view your inventory.");
-            System.out.println("If you wish to take or drop an item, simply input take or drop, and the item's name");
-            System.out.println("And use 'eat' and 'drink' for food and drinks");
-            System.out.println("Type exit to exit the game");
+
+    public void help() {
+        System.out.println("You are standing in " + map.getCurrentRoom().getRoomName());
+        System.out.println("In this game you may move in 4 directions");
+        System.out.println("North, South, East, West");
+        System.out.println("Type 'Look around' to see which directions you may move to");
+        System.out.println("'Search' to search the room.");
+        System.out.println("'Health', or 'Display Healthbar' to see current Health Points");
+        System.out.println("'Inventory' to view your inventory.");
+        System.out.println("If you wish to take or drop an item, simply input take or drop, and the item's name");
+        System.out.println("And use 'eat' and 'drink' for food and drinks");
+        System.out.println("Type exit to exit the game");
+    }
+
+    public void look() {
+        System.out.println("You are standing in " + player.getPlayerLocation().getRoomName() + player.getPlayerLocation().getRoomDesc());
+        System.out.println("Looking around, you see paths leading... ");
+        if (player.getPlayerLocation().northRoom != null) {
+            System.out.println("... North");
         }
-        public void look () {
-            System.out.println("You are standing in " + player.getPlayerLocation().getRoomName() + player.getPlayerLocation().getRoomDesc());
-            System.out.println("Looking around, you see paths leading... ");
-             if (player.getPlayerLocation().northRoom != null){
-                 System.out.println("... North");
-             }if (player.getPlayerLocation().eastRoom != null){
-                 System.out.println("... East");
-             }if (player.getPlayerLocation().southRoom != null){
-                 System.out.println("... South");
-             }if (player.getPlayerLocation().westRoom != null){
-                 System.out.println("... West");}
-            }
-        public void displayHealth() {
-            System.out.println("You have " + player.getHealth() + " health points.");
-            if (player.getHealth() >0 && player.getHealth() <= 25){
-                System.out.println("You are gravely wounded, you should rest and tend to your wounds");
-            }
-            if (player.getHealth() >25 && player.getHealth() <= 50){
-                System.out.println("You are injured, be wary");
-            }
-            if (player.getHealth() >50 && player.getHealth() <= 75){
-                System.out.println("You've suffered some wounds");
-            }
-            if (player.getHealth() >75){
-                System.out.println("You're in good form, fight on!");}
-            }
-        public void gameOverCheck() {
-        if (player.getHealth() <= 0){
+        if (player.getPlayerLocation().eastRoom != null) {
+            System.out.println("... East");
+        }
+        if (player.getPlayerLocation().southRoom != null) {
+            System.out.println("... South");
+        }
+        if (player.getPlayerLocation().westRoom != null) {
+            System.out.println("... West");
+        }
+    }
+
+    public void displayHealth() {
+        System.out.println("You have " + player.getHealth() + " health points.");
+        if (player.getHealth() > 0 && player.getHealth() <= 25) {
+            System.out.println("You are gravely wounded, you should rest and tend to your wounds");
+        }
+        if (player.getHealth() > 25 && player.getHealth() <= 50) {
+            System.out.println("You are injured, be wary");
+        }
+        if (player.getHealth() > 50 && player.getHealth() <= 75) {
+            System.out.println("You've suffered some wounds");
+        }
+        if (player.getHealth() > 75) {
+            System.out.println("You're in good form, fight on!");
+        }
+    }
+
+    public void gameOverCheck() {
+        if (player.getHealth() <= 0) {
             System.out.println("Death comes for us all.");
             System.out.println("Game Over!");
-            System.exit(0);}
-        if (player.getHealth() == 100)
-        {System.out.println("You are sated and at full health");}
+            System.exit(0);
         }
-        public void search () {
-            System.out.println("You search the room for treasures.");
-            System.out.println();
-            List<Item> itemsInRoom = map.getCurrentRoom().getItems();
-            if (itemsInRoom != null && !itemsInRoom.isEmpty()) {
-                for (Item item : itemsInRoom) {
-                    System.out.println("You find " + item.getItemName());}
-            } else {
-                System.out.println("This room is void food or treasures");}
-                }
-        public void displayInventory () {
-            System.out.println("You search your bag... ");
-            if (player.inventory.isEmpty()) {
-                System.out.println(" ... It remains empty.");
-            } else {
-                System.out.println(".. And find its contents within. Just as you left them: ");
-                for (Item item : player.inventory) {
-                    System.out.println(item.getItemName() + " \n" + item.getItemDescription());}
-                 }
+        if (player.getHealth() == 100) {
+            System.out.println("You are sated and at full health");
+        }
+    }
+
+    public void search() {
+        System.out.println("You search the room for treasures.");
+        System.out.println();
+        List<Item> itemsInRoom = map.getCurrentRoom().getItems();
+        if (itemsInRoom != null && !itemsInRoom.isEmpty()) {
+            for (Item item : itemsInRoom) {
+                System.out.println("You find " + item.getItemName());
             }
-        public void takeOrDropItem (String itemName) {
-            Room currentRoom = player.getPlayerLocation();
-            itemName = itemName;
-            Item foundItem = null;
+        } else {
+            System.out.println("This room is void food or treasures");
+        }
+    }
+
+    public void displayInventory() {
+        System.out.println("You search your bag... ");
+        if (player.inventory.isEmpty()) {
+            System.out.println(" ... It remains empty.");
+        } else {
+            System.out.println(".. And find its contents within. Just as you left them: ");
+            for (Item item : player.inventory) {
+                System.out.println(item.getItemName() + " \n" + item.getItemDescription());
+            }
+        }
+    }
+
+    public void takeOrDropItem(String itemName, boolean inInventory) {
+        Room currentRoom = player.getPlayerLocation();
+        Item foundItem = null;
+
+        for (Item item : player.getInventory()) {
+            if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.toLowerCase().replaceAll("\\s+", ""))) {
+                foundItem = item;
+                break;
+            }
+        }
+        if (foundItem == null) {
             for (Item item : currentRoom.getItems()) {
-                if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
+                if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.toLowerCase().replaceAll("\\s+", ""))) {
                     foundItem = item;
                     break;
                 }
             }
-            if (foundItem != null) {
-                player.inventory.add(foundItem);
-                currentRoom.getItems().remove(foundItem);
-                System.out.println("You picked up " + foundItem.getItemName() + " \n" + foundItem.getItemDescription());
-            } else{
-                for (Item item : player.inventory) {
-                    if (item.getItemName().toLowerCase().replaceAll("\\s+", "").contains(itemName.replaceAll("\\s+", ""))) {
-                        foundItem = item;
-                        currentRoom.addItem(foundItem);
-                        player.inventory.remove(foundItem);
-                        System.out.println("You dropped " + foundItem.getItemName());
-                        break;
+        }
+        if (foundItem != null) {
+            if (!inInventory) {
+                player.getInventory().add(foundItem);
+                if (currentRoom.getItems().contains(foundItem)) {
+                    currentRoom.getItems().remove(foundItem);
+                }
+                System.out.println("You picked up " + foundItem.getItemName() + "\n" + foundItem.getItemDescription());
+            } else {
+                if (player.getInventory().contains(foundItem)) {
+                    currentRoom.addItem(foundItem);
+                    player.getInventory().remove(foundItem);
+                    System.out.println("You dropped " + foundItem.getItemName());
+                } else {
+                    System.out.println("That might not be where you think it is");
                 }
             }
+        } else {
+            System.out.println("Item not found in the current room or your inventory.");
         }
     }
     public void unEquipWeapon(){
@@ -247,7 +281,6 @@ public class UserInterface {
             }
         }
     }
-
     public void eatOrDrink(String itemName, boolean isEating) {
            boolean rations = false;
            for (Item item : player.getInventory()) {
@@ -274,7 +307,6 @@ public class UserInterface {
                    System.out.println("Item not found in your inventory or not edible.");
                }
            }
-
         public void moveTo(Room requestedRoom) {
             if (requestedRoom == null) {
                 System.out.println("There's nothing in that direction");
