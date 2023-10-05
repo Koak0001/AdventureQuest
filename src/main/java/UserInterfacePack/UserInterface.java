@@ -99,6 +99,10 @@ public class UserInterface {
                     displayHealth();
                     validCommandProcessed = true;
                 }
+                case "unequip" ->{
+                    unEquipWeapon();
+                    validCommandProcessed = true;
+                }
             }
             if (!validCommandProcessed && inputTokens.length == 2) {
 
@@ -109,7 +113,9 @@ public class UserInterface {
                     takeOrDropItem(itemName);
                 } if (inputTokens[0].equals("eat")){
                     eatOrDrink(itemName, true);
-                } if (inputTokens[0].equals("drink") ){
+                } if (inputTokens[0].equals("equip")){
+                    setEquippedWeapon(itemName);}
+                 if (inputTokens[0].equals("drink") ){
                     eatOrDrink(itemName, false);
                 }
             } else if (!validCommandProcessed) {
@@ -150,7 +156,7 @@ public class UserInterface {
                 System.out.println("You are injured, be wary");
             }
             if (player.getHealth() >50 && player.getHealth() <= 75){
-                System.out.println("You've suffered minor wounds");
+                System.out.println("You've suffered some wounds");
             }
             if (player.getHealth() >75){
                 System.out.println("You're in good form, fight on!");}
@@ -209,7 +215,40 @@ public class UserInterface {
             }
         }
     }
-       public void eatOrDrink(String itemName, boolean isEating) {
+    public void unEquipWeapon(){
+        if (player.hasEquippedWeapon()) {
+            System.out.println("You've unequipped the " + player.getEquippedWeapon().getItemName());
+            player.setHasEquippedWeapon(false);
+        }else{
+            System.out.println("You are not wielding a weapon.");
+        }
+    }
+    public void setEquippedWeapon(String toEquip) {
+        if (player.hasEquippedWeapon()) {
+            System.out.println("You must unequip your current weapon.");
+        } else {
+            Weapon equippedWeapon = null;
+            for (Item item : player.inventory) {
+                if (item instanceof Weapon) {
+                    Weapon weaponToEquip = (Weapon) item;
+                    if (weaponToEquip.getItemName().toLowerCase().replaceAll("\\s+", "").contains(toEquip.replaceAll("\\s+", ""))) {
+                        equippedWeapon = weaponToEquip;
+                        player.setEquippedWeapon(equippedWeapon);
+                        player.setHasEquippedWeapon(true);
+                        System.out.println("You've equipped the " + weaponToEquip.getItemName());
+                        System.out.println(); //Break
+                        System.out.println(weaponToEquip.getItemDescription());
+                       // break;
+                    }
+                }
+            }
+            if (equippedWeapon == null) {
+                System.out.println("No weapon with the name " + toEquip + " found in your inventory.");
+            }
+        }
+    }
+
+    public void eatOrDrink(String itemName, boolean isEating) {
            boolean rations = false;
            for (Item item : player.getInventory()) {
                if (isEating && item.getItemType().equals(ItemType.FOOD) && item.getFoodType().equals(FoodType.FOOD)
