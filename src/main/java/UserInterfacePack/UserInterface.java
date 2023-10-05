@@ -93,7 +93,10 @@ public class UserInterface {
                     validCommandProcessed = true;
                 }
                 case "inventory" -> {
+                    if (player.hasEquippedWeapon()){
                     displayInventory();
+                    System.out.println("You're wielding the " + player.getEquippedWeapon().getItemName() );}
+                    else {displayInventory();}
                     validCommandProcessed = true;
                 }
                 case "attack" -> {

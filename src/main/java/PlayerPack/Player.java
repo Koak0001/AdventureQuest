@@ -9,7 +9,8 @@ import java.util.List;
 
 public class Player {
     private final Map map;
-    private Room requestRoom;
+
+//    private Room requestRoom;
     private Room playerLocation;
     private Weapon equippedWeapon;
     boolean hasEquippedWeapon;
@@ -34,13 +35,13 @@ public class Player {
         return playerLocation;
     }
 
-    public void setRequestRoom(Room requestRoom) {
-        this.requestRoom = requestRoom;
-    }
-
-    public Room getRequestRoom() {
-        return requestRoom;
-    }
+//    public void setRequestRoom(Room requestRoom) {
+//        this.requestRoom = requestRoom;
+//    }
+//
+//    public Room getRequestRoom() {
+//        return requestRoom;
+//    }
 
     public List<Item> getInventory() {
         return inventory;
@@ -67,7 +68,6 @@ public class Player {
     public Weapon getEquippedWeapon() {
         return equippedWeapon;
     }
-    public String getAbility(){return getEquippedWeapon().getAbility();}
 
     public boolean hasEquippedWeapon() {
         return hasEquippedWeapon;
