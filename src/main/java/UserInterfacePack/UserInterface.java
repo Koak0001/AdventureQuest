@@ -128,7 +128,6 @@ public class UserInterface {
             }
         }
     }
-
     public void help() {
         System.out.println("You are standing in " + map.getCurrentRoom().getRoomName());
         System.out.println("In this game you may move in 4 directions");
@@ -141,7 +140,6 @@ public class UserInterface {
         System.out.println("And use 'eat' and 'drink' for food and drinks");
         System.out.println("Type exit to exit the game");
     }
-
     public void look() {
         System.out.println("You are standing in " + player.getPlayerLocation().getRoomName() + player.getPlayerLocation().getRoomDesc());
         System.out.println("Looking around, you see paths leading... ");
@@ -158,7 +156,6 @@ public class UserInterface {
             System.out.println("... West");
         }
     }
-
     public void displayHealth() {
         System.out.println("You have " + player.getHealth() + " health points.");
         if (player.getHealth() > 0 && player.getHealth() <= 25) {
@@ -174,7 +171,6 @@ public class UserInterface {
             System.out.println("You're in good form, fight on!");
         }
     }
-
     public void gameOverCheck() {
         if (player.getHealth() <= 0) {
             System.out.println("Death comes for us all.");
@@ -185,7 +181,6 @@ public class UserInterface {
             System.out.println("You are sated and at full health");
         }
     }
-
     public void search() {
         System.out.println("You search the room for treasures.");
         System.out.println();
@@ -198,7 +193,6 @@ public class UserInterface {
             System.out.println("This room is void food or treasures");
         }
     }
-
     public void displayInventory() {
         System.out.println("You search your bag... ");
         if (player.inventory.isEmpty()) {
@@ -210,7 +204,6 @@ public class UserInterface {
             }
         }
     }
-
     public void takeOrDropItem(String itemName, boolean inInventory) {
         Room currentRoom = player.getPlayerLocation();
         Item foundItem = null;
@@ -249,11 +242,13 @@ public class UserInterface {
             System.out.println("Item not found in the current room or your inventory.");
         }
     }
-    public void unEquipWeapon(){
+    public void unEquipWeapon() {
         if (player.hasEquippedWeapon()) {
-            System.out.println("You've unequipped the " + player.getEquippedWeapon().getItemName());
+            Item equippedWeapon = player.getEquippedWeapon();
+            player.getInventory().add(equippedWeapon); // Add the unequipped weapon back to the inventory
             player.setHasEquippedWeapon(false);
-        }else{
+            System.out.println("You've unequipped the " + equippedWeapon.getItemName());
+        } else {
             System.out.println("You are not wielding a weapon.");
         }
     }
@@ -262,21 +257,23 @@ public class UserInterface {
             System.out.println("You must unequip your current weapon.");
         } else {
             Weapon equippedWeapon = null;
-            for (Item item : player.inventory) {
+            for (Item item : player.getInventory()) {
                 if (item instanceof Weapon) {
                     Weapon weaponToEquip = (Weapon) item;
                     if (weaponToEquip.getItemName().toLowerCase().replaceAll("\\s+", "").contains(toEquip.replaceAll("\\s+", ""))) {
                         equippedWeapon = weaponToEquip;
-                        player.setEquippedWeapon(equippedWeapon);
-                        player.setHasEquippedWeapon(true);
-                        System.out.println("You've equipped the " + weaponToEquip.getItemName());
-                        System.out.println(); //Break
-                        System.out.println(weaponToEquip.getItemDescription());
-                       // break;
+                        break;
                     }
                 }
             }
-            if (equippedWeapon == null) {
+            if (equippedWeapon != null) {
+                player.getInventory().remove(equippedWeapon);
+                player.setEquippedWeapon(equippedWeapon);
+                player.setHasEquippedWeapon(true);
+                System.out.println("You've equipped the " + equippedWeapon.getItemName());
+                System.out.println(); // Break
+                System.out.println(equippedWeapon.getItemDescription());
+            } else {
                 System.out.println("No weapon with the name " + toEquip + " found in your inventory.");
             }
         }

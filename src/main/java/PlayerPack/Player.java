@@ -74,6 +74,8 @@ public class Player {
         this.hasEquippedWeapon = hasEquippedWeapon;
     }
 
+    //public void Attack
+
 
 }
 
