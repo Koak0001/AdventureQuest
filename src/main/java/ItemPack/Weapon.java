@@ -11,6 +11,10 @@ public class Weapon extends Item {
         isActive = false;
 
     }
+    public int getDamage() {
+        return damage;
+    }
+    public String getAbility(){return ability;}
 
 
 

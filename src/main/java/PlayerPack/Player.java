@@ -1,7 +1,6 @@
 package PlayerPack;
 import ItemPack.Item;
 import ItemPack.Weapon;
-import ItemPack.WeaponType;
 import MapPack.Map;
 import RoomPack.Room;
 
@@ -61,22 +60,34 @@ public class Player {
         this.health = Math.min(100, health);
     }
 
-    public void setEquippedWeapon(Weapon weapon){
+    public void setEquippedWeapon(Weapon weapon) {
         this.equippedWeapon = weapon;
     }
+
     public Weapon getEquippedWeapon() {
         return equippedWeapon;
     }
+    public String getAbility(){return getEquippedWeapon().getAbility();}
+
     public boolean hasEquippedWeapon() {
         return hasEquippedWeapon;
     }
+
     public void setHasEquippedWeapon(boolean hasEquippedWeapon) {
         this.hasEquippedWeapon = hasEquippedWeapon;
     }
 
-    //public void Attack
-
-
+    public int attack() {
+        if (hasEquippedWeapon) {
+            int weaponDamage = 0;
+            int strike = 1;
+            weaponDamage = getEquippedWeapon().getDamage();
+            strike = 1 + weaponDamage;
+            return strike;
+        } else {
+            return 1;
+        }
+    }
 }
 
 

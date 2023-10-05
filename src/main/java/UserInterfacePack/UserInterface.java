@@ -96,6 +96,17 @@ public class UserInterface {
                     displayInventory();
                     validCommandProcessed = true;
                 }
+                case "attack" -> {
+                    int strikeDamage = player.attack();
+                    if (player.hasEquippedWeapon()){
+                        System.out.println("You strike with the " + player.getEquippedWeapon().getItemName() + " for " + strikeDamage + " damage.");
+                        System.out.println();//break
+                        System.out.println(player.getEquippedWeapon().getAbility());
+                    }if (!player.hasEquippedWeapon()){
+                        System.out.println("Though unarmed, you fight your best for " + strikeDamage + " damage.");
+                    }
+                    validCommandProcessed = true;
+                }
                 case "healthbar", "health" -> {
                     displayHealth();
                     validCommandProcessed = true;
