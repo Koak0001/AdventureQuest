@@ -7,9 +7,11 @@ import java.util.ArrayList;
 public class Map {
     private Room currentRoom;
     private ArrayList<Item> items;
+
     public Map() {
         initializeMap();
     }
+
     private void initializeMap() {
         ItemDatabase itemDatabase = new ItemDatabase();
         items = new ArrayList<>();
@@ -24,7 +26,7 @@ public class Map {
         Room room6 = new Room("Room 6 - Shrine of the Forgotten Gods\n", "An ornate room dedicated to long-forgotten deities.\nBroken statues lie toppled on the floor, and the once-sacred altar is now covered in spiderwebs.\n");
         Room room7 = new Room("Room 7 - Macabre Art Room\n", "A chilling gallery displaying gruesome paintings and sculptures.\nThe artwork seems to come to life in the dim light, evoking a sense of dread.\n");
         Room room8 = new Room("Room 8 - Chamber of Whispers\n", "A small, eerie room filled with tattered curtains that billow mysteriously in the stagnant air.\nFaint whispers seem to emanate from the walls themselves, carrying ancient secrets.\n");
-        Room room9 = new Room("Room 9 - Library of Lost Knowledge\n", "Rows of rotting bookshelves filled with disintegrating tomes.\nMotes of dust dance in the faint rays of light filtering through boarded-up windows.\n" );
+        Room room9 = new Room("Room 9 - Library of Lost Knowledge\n", "Rows of rotting bookshelves filled with disintegrating tomes.\nMotes of dust dance in the faint rays of light filtering through boarded-up windows.\n");
 
         // Room connectors and Room items:
 
@@ -83,7 +85,7 @@ public class Map {
         room2.addItem(food2);
         Item food3 = itemDatabase.items.get(11);
         room3.addItem(food3);
-        Item food4 =  itemDatabase.items.get(12);
+        Item food4 = itemDatabase.items.get(12);
         room9.addItem(food4);
         Item potion1 = itemDatabase.items.get(13);
         room9.addItem(potion1);
@@ -102,7 +104,7 @@ public class Map {
         room2.addItem(potion4);
         Item potion5 = itemDatabase.items.get(20);
         room3.addItem(potion5);
-        Item potion6 =  itemDatabase.items.get(21);
+        Item potion6 = itemDatabase.items.get(21);
         room9.addItem(potion6);
         Item potion7 = itemDatabase.items.get(22);
         room8.addItem(potion7);
@@ -122,10 +124,24 @@ public class Map {
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
     }
-    public Room getCurrentRoom() {
-        return currentRoom;}
 
-}
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 

@@ -34,10 +34,11 @@ public class UserInterface {
         adventure.newGame();
         Scanner keyboard = new Scanner(System.in);
         boolean exit = false;
-        System.out.println("Welcome to the game you are standing in " + map.getCurrentRoom().getRoomName() + map.getCurrentRoom().getRoomDesc());
+        System.out.println("Let the Adventure begin!");
+        System.out.println(map.getCurrentRoom());
         player.getPlayerLocation().setVisited();
-        System.out.println("Start by going south or east ");
-        System.out.println("Type help for help");
+        System.out.println("Type 'look around' to see where you might go.");
+        System.out.println("Type help for more input options.");
         while (!exit) {
             String userInput = keyboard.nextLine().toLowerCase();
             userInput = userInput.replace("go", "")
@@ -95,7 +96,8 @@ public class UserInterface {
                 case "inventory" -> {
                     if (player.hasEquippedWeapon()){
                     displayInventory();
-                    System.out.println("You're wielding the " + player.getEquippedWeapon().getItemName());}
+                    System.out.println("You're wielding " + player.getEquippedWeapon());
+                    }
                     else {displayInventory();}
                     validCommandProcessed = true;
                 }
@@ -112,15 +114,18 @@ public class UserInterface {
                     if (player.hasEquippedWeapon() && player.getEquippedWeapon().isRanged() && player.getEquippedWeapon().isOutOfAmmo()){
                         System.out.println("Your quiver is empty!");
                     }if (player.hasEquippedWeapon() && player.getEquippedWeapon().isRanged() && !player.getEquippedWeapon().isOutOfAmmo()){
-                        System.out.println("You let loose an arrow with the " + player.getEquippedWeapon().getItemName() + " for " + strikeDamage + " damage.");
+                        System.out.println("You let loose an arrow with the " + player.getEquippedWeapon().getItemName());
                         System.out.println(player.getEquippedWeapon().getAbility());
+                        System.out.println();
+                        System.out.println(strikeDamage + " damage!");
                         System.out.println("You have " + player.getEquippedWeapon().getAmmo() + " arrows left in your quiver.");
                     }if (player.hasEquippedWeapon() && !player.getEquippedWeapon().isRanged()){
-                        System.out.println("You strike with the " + player.getEquippedWeapon().getItemName() + " for " + strikeDamage + " damage.");
-                        System.out.println();//break
+                        System.out.println("You strike with " + player.getEquippedWeapon().getItemName());
+                        System.out.println( strikeDamage + " damage!");//break
                         System.out.println(player.getEquippedWeapon().getAbility());
                     }if (!player.hasEquippedWeapon()){
-                        System.out.println("Though unarmed, you fight your best for " + strikeDamage + " damage.");
+                        System.out.println("Unarmed, you pose little threat");
+                        System.out.println(strikeDamage + " damage.");
                     }
                     validCommandProcessed = true;
                 }
@@ -164,12 +169,15 @@ public class UserInterface {
         System.out.println("'Search' to search the room.");
         System.out.println("'Health', or 'Display Healthbar' to see current Health Points");
         System.out.println("'Inventory' to view your inventory.");
+        System.out.println("You may 'equip' and 'unequip' found weapons");
+        System.out.println("And you have access to a 'quiver' too.");
         System.out.println("If you wish to take or drop an item, simply input take or drop, and the item's name");
         System.out.println("And use 'eat' and 'drink' for food and drinks");
         System.out.println("Type exit to exit the game");
     }
     public void look() {
-        System.out.println("You are standing in " + player.getPlayerLocation().getRoomName() + player.getPlayerLocation().getRoomDesc());
+        System.out.println("You are standing in ");
+        System.out.println(map.getCurrentRoom());
         System.out.println("Looking around, you see paths leading... ");
         if (player.getPlayerLocation().northRoom != null) {
             System.out.println("... North");
@@ -228,7 +236,7 @@ public class UserInterface {
         } else {
             System.out.println(".. And find its contents within. Just as you left them: ");
             for (Item item : player.inventory) {
-                System.out.println(item.getItemName() + " \n" + item.getItemDescription());
+                System.out.println(item.getItemName() + " , " + item.getItemDescription());
             }
         }
     }
@@ -256,7 +264,8 @@ public class UserInterface {
                 if (currentRoom.getItems().contains(foundItem)) {
                     currentRoom.getItems().remove(foundItem);
                 }
-                System.out.println("You picked up " + foundItem.getItemName() + "\n" + foundItem.getItemDescription());
+                System.out.println("You picked up " + foundItem.getItemName());
+                System.out.println();
             } else {
                 if (player.getInventory().contains(foundItem)) {
                     currentRoom.addItem(foundItem);
@@ -267,7 +276,7 @@ public class UserInterface {
                 }
             }
         } else {
-            System.out.println("Item not found in the current room or your inventory.");
+            System.out.println("Item not found.");
         }
     }
     public void unEquipWeapon() {
@@ -298,9 +307,9 @@ public class UserInterface {
                 player.getInventory().remove(equippedWeapon);
                 player.setEquippedWeapon(equippedWeapon);
                 player.setHasEquippedWeapon(true);
-                System.out.println("You've equipped the " + equippedWeapon.getItemName());
-                System.out.println(); // Break
-                System.out.println(equippedWeapon.getItemDescription());
+                System.out.println("You've equipped " + equippedWeapon.getItemName());
+                System.out.println(equippedWeapon.getAbility());
+                System.out.println();
             } else {
                 System.out.println("No weapon with the name " + toEquip + " found in your inventory.");
             }
@@ -317,10 +326,9 @@ public class UserInterface {
                        if (rationName.contains(itemName.replaceAll("\\s+", ""))) {
                            int currentHealth = player.getHealth();
                            int healthMod = ration.getHealthMod();
-
-                           System.out.println("You consume " + ration.getItemName() + "\nIt is " + ration.getEffect());
+                           System.out.println(item);
                            player.setHealth(currentHealth + healthMod);
-                           System.out.println(player.getHealth());
+                           System.out.println("You have " + player.getHealth() + " health points left.");
                            player.getInventory().remove(ration);
                            rations = true;
                            gameOverCheck();
@@ -340,9 +348,10 @@ public class UserInterface {
                 requestedRoom.setVisited();
                 player.setPlayerLocation(requestedRoom);
                 moveTax();
-                System.out.println(player.getPlayerLocation().getRoomDesc());
+                System.out.println(requestedRoom);
             } else {
                 player.setPlayerLocation(requestedRoom);
+                System.out.println(requestedRoom.getRoomName());
                 moveTax();
             }
         }
@@ -352,7 +361,6 @@ public class UserInterface {
             System.out.println("Making your way through the ruins is a gruelling task ");
             player.setHealth(currentHealth - 1);
             System.out.println("You have " + player.getHealth() + " health points.");
-            System.out.println(player.getPlayerLocation().getRoomName());
             gameOverCheck();
     }
 

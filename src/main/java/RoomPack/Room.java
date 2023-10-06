@@ -13,6 +13,7 @@ public class Room {
     public Room westRoom;
     public boolean visited;
     private final ArrayList<Item> items;
+    private Room currentRoom;
 
     public Room(String roomName, String roomDesc) {
         this.roomName = roomName;
@@ -23,6 +24,8 @@ public class Room {
         this.southRoom = null;
         this.westRoom = null;
         this.visited = false;
+        this.currentRoom = null;
+
     }
 
     // Setters
@@ -48,16 +51,7 @@ public class Room {
         return roomDesc;
     }
 
-    public Room getWestRoom() {
-        return westRoom;
-    }
-    public Room getEastRoom() {return eastRoom;}
-    public Room getSouthRoom() {
-        return southRoom;
-    }
-    public Room getNorthRoom() {
-        return northRoom;
-    }
+
 
     // Booleans
     public boolean isVisited() {
@@ -66,6 +60,11 @@ public class Room {
     public void setVisited() {
         this.visited = true;
     }
+
+
+    public String toString() {
+        return "You are in" + roomName + " \n" +  roomDesc;}
+
 
     // Getter for items
     public ArrayList<Item> getItems() {
@@ -78,4 +77,19 @@ public class Room {
             items.add(roomItem);
         }
     }
-}
+
+    public Room getWestRoom() {
+        return westRoom;
+    }
+    public Room getEastRoom() {return eastRoom;}
+    public Room getSouthRoom() {
+        return southRoom;
+    }
+    public Room getNorthRoom() {
+        return northRoom;
+    }
+
+
+
+    }
+

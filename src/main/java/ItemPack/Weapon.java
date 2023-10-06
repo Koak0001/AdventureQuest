@@ -17,12 +17,11 @@ public class Weapon extends Item {
 
         this.weaponType = weaponType;
     }
+
     public int getDamage() {
         return damage;
     }
     public String getAbility(){return ability;}
-
-
 
     public int getAmmo(){
         return ammo;

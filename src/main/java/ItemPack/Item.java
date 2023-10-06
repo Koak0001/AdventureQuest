@@ -11,6 +11,11 @@ public abstract class Item {
         this.itemDescription = itemDescription;
         this.itemType = itemType;
     }
+    public String toString(){
+        return  "The " + itemName + " \n" + itemDescription + " \n";
+
+    }
+
 
     public String getItemName() {
         return itemName;
