@@ -54,27 +54,28 @@ public class UserInterface {
                     .trim();
             String input = userInput;
             String[] inputTokens = userInput.split("\\s+", 2);
+
 //            InputTokens results, for debugging purposes.
 //            System.out.println("Input: " + userInput);
 //            System.out.println("InputTokens: " + Arrays.toString(inputTokens));
             boolean validCommandProcessed = false;
-            Room targetRoom = null;
+            boolean noPath = false;
 
             switch (input) {
                 case "north", "n" -> {
-                    moveTo(player.getPlayerLocation().northRoom);
+                    moveTo(map.getCurrentRoom().northRoom);
                     validCommandProcessed = true;
                 }
                 case "south", "s" -> {
-                    moveTo(player.getPlayerLocation().southRoom);
+                    moveTo(map.getCurrentRoom().southRoom);
                     validCommandProcessed = true;
                 }
                 case "west", "w" -> {
-                    moveTo(player.getPlayerLocation().westRoom);
+                    moveTo(map.getCurrentRoom().westRoom);
                     validCommandProcessed = true;
                 }
                 case "east", "e" -> {
-                    moveTo(player.getPlayerLocation().eastRoom);
+                    moveTo(map.getCurrentRoom().eastRoom);
                     validCommandProcessed = true;
                 }
                 case "help" -> {
@@ -162,9 +163,9 @@ public class UserInterface {
         }
     }
     public void help() {
-        System.out.println("You are standing in " + map.getCurrentRoom().getRoomName());
-        System.out.println("In this game you may move in 4 directions");
-        System.out.println("North, South, East, West");
+        System.out.println("You are currently standing in " + map.getCurrentRoom().getRoomName());
+        System.out.println("There you may move move in 4 directions");
+        System.out.println("North, South, East, or West");
         System.out.println("Type 'Look around' to see which directions you may move to");
         System.out.println("'Search' to search the room.");
         System.out.println("'Health', or 'Display Healthbar' to see current Health Points");
@@ -180,7 +181,7 @@ public class UserInterface {
         System.out.println(map.getCurrentRoom());
         System.out.println("Looking around, you see paths leading... ");
         if (player.getPlayerLocation().northRoom != null) {
-            System.out.println("... North");
+            System.out.println("... North ");
         }
         if (player.getPlayerLocation().eastRoom != null) {
             System.out.println("... East");
@@ -217,18 +218,42 @@ public class UserInterface {
             System.out.println("You are sated and at full health");
         }
     }
-    public void search() {
-        System.out.println("You search the room for treasures.");
-        System.out.println();
-        List<Item> itemsInRoom = map.getCurrentRoom().getItems();
-        if (itemsInRoom != null && !itemsInRoom.isEmpty()) {
-            for (Item item : itemsInRoom) {
-                System.out.println("You find " + item.getItemName());
-            }
+
+    public void moveTo(Room requestedRoom) {
+        if (requestedRoom == null) {
+            System.out.println();
+        } else if (!requestedRoom.isVisited()) {
+            requestedRoom.setVisited();
+            player.setPlayerLocation(requestedRoom);
+            moveTax();
+            System.out.println(requestedRoom);
         } else {
-            System.out.println("This room is void food or treasures");
+            player.setPlayerLocation(requestedRoom);
+            System.out.println(requestedRoom.getRoomName());
+            moveTax();
         }
     }
+    public void moveTax() {
+        int currentHealth = player.getHealth();
+        map.setCurrentRoom(player.getPlayerLocation());
+        System.out.println("Making your way through the ruins is a gruelling task ");
+        player.setHealth(currentHealth - 1);
+        System.out.println("You have " + player.getHealth() + " health points.");
+        gameOverCheck();
+    }
+        public void search() {
+            System.out.println("You search the room for treasures.");
+            System.out.println();
+            List<Item> itemsInRoom = map.getCurrentRoom().getItems();
+            if (itemsInRoom != null && !itemsInRoom.isEmpty()) {
+                for (Item item : itemsInRoom) {
+                    System.out.println("You find " + item.getItemName());
+                }
+            } else {
+                System.out.println("This room is void food or treasures");
+            }
+        }
+
     public void displayInventory() {
         System.out.println("You search your bag... ");
         if (player.inventory.isEmpty()) {
@@ -338,30 +363,9 @@ public class UserInterface {
                }
                if (!rations) {
                    System.out.println("Item not found in your inventory or not edible.");
-               }
            }
-        public void moveTo(Room requestedRoom) {
-            if (requestedRoom == null) {
-                System.out.println("There's nothing in that direction");
 
-        } else if (!requestedRoom.isVisited()) {
-                requestedRoom.setVisited();
-                player.setPlayerLocation(requestedRoom);
-                moveTax();
-                System.out.println(requestedRoom);
-            } else {
-                player.setPlayerLocation(requestedRoom);
-                System.out.println(requestedRoom.getRoomName());
-                moveTax();
-            }
-        }
-        public void moveTax() {
-            int currentHealth = player.getHealth();
-            map.setCurrentRoom(player.getPlayerLocation());
-            System.out.println("Making your way through the ruins is a gruelling task ");
-            player.setHealth(currentHealth - 1);
-            System.out.println("You have " + player.getHealth() + " health points.");
-            gameOverCheck();
+
     }
 
 }

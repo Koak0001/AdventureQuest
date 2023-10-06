@@ -59,64 +59,103 @@ public class Map {
 
         currentRoom = room1;
 
+// Room 1
         Item item1 = itemDatabase.items.get(0);
         room1.addItem(item1);
         Item item2 = itemDatabase.items.get(1);
-        room2.addItem(item2);
-        Item item3 = itemDatabase.items.get(2);
-        room8.addItem(item3);
-        Item item4 = itemDatabase.items.get(3);
-        room3.addItem(item4);
-        Item item5 = itemDatabase.items.get(4);
-        room7.addItem(item5);
+        room1.addItem(item2);
         Item item6 = itemDatabase.items.get(5);
-        room7.addItem(item6);
-        Item item7 = itemDatabase.items.get(6);
-        room5.addItem(item7);
-        Item item8 = itemDatabase.items.get(7);
-        room5.addItem(item8);
-        Item item9 = itemDatabase.items.get(8);
-        room5.addItem(item9);
-
-        //Food
+        room1.addItem(item6);
         Item food1 = itemDatabase.items.get(9);
         room1.addItem(food1);
-        Item food2 = itemDatabase.items.get(10);
-        room2.addItem(food2);
-        Item food3 = itemDatabase.items.get(11);
-        room3.addItem(food3);
-        Item food4 = itemDatabase.items.get(12);
-        room9.addItem(food4);
-        Item potion1 = itemDatabase.items.get(13);
-        room9.addItem(potion1);
         Item food6 = itemDatabase.items.get(14);
         room1.addItem(food6);
         Item food7 = itemDatabase.items.get(15);
         room1.addItem(food7);
-        Item food8 = itemDatabase.items.get(16);
-        room2.addItem(food8);
         Item potion2 = itemDatabase.items.get(17);
         room1.addItem(potion2);
-
         Item potion3 = itemDatabase.items.get(18);
         room1.addItem(potion3);
+        Item misc3 = itemDatabase.items.get(29);
+        room1.addItem(misc3);
+        Item misc1 = itemDatabase.items.get(27);
+        room1.addItem(misc1);
+        Item misc2 = itemDatabase.items.get(28);
+        room1.addItem(misc2);
+
+// Room 2
+        Item item3 = itemDatabase.items.get(2);
+        room2.addItem(item3);
+        Item item8 = itemDatabase.items.get(7);
+        room2.addItem(item8);
+        Item food2 = itemDatabase.items.get(10);
+        room2.addItem(food2);
+        Item food8 = itemDatabase.items.get(16);
+        room2.addItem(food8);
         Item potion4 = itemDatabase.items.get(19);
         room2.addItem(potion4);
-        Item potion5 = itemDatabase.items.get(20);
-        room3.addItem(potion5);
-        Item potion6 = itemDatabase.items.get(21);
-        room9.addItem(potion6);
-        Item potion7 = itemDatabase.items.get(22);
-        room8.addItem(potion7);
-        Item potion8 = itemDatabase.items.get(23);
-        room4.addItem(potion8);
-        Item potion9 = itemDatabase.items.get(24);
-        room6.addItem(potion9);
         Item potion10 = itemDatabase.items.get(25);
         room2.addItem(potion10);
         Item potion11 = itemDatabase.items.get(26);
-        room1.addItem(potion11);
+        room2.addItem(potion11);
 
+// Room 3
+        Item item4 = itemDatabase.items.get(3);
+        room3.addItem(item4);
+        Item item10 = itemDatabase.items.get(9); // Assuming item10 should be retrieved from the item list
+        room3.addItem(item10);
+        Item potion5 = itemDatabase.items.get(20);
+        room3.addItem(potion5);
+        Item misc4 = itemDatabase.items.get(30);
+        room3.addItem(misc4);
+
+// Room 4
+        Item potion8 = itemDatabase.items.get(23);
+        room4.addItem(potion8);
+        Item misc5 = itemDatabase.items.get(31);
+        room4.addItem(misc5);
+
+// Room 5
+        Item item5 = itemDatabase.items.get(4);
+        room5.addItem(item5);
+        Item item7 = itemDatabase.items.get(6);
+        room5.addItem(item7);
+        Item item9 = itemDatabase.items.get(8);
+        room5.addItem(item9);
+        Item misc6 = itemDatabase.items.get(32);
+        room5.addItem(misc6);
+
+// Room 6
+        Item potion9 = itemDatabase.items.get(24);
+        room6.addItem(potion9);
+        Item misc7 = itemDatabase.items.get(33);
+        room6.addItem(misc7);
+
+// Room 7
+        Item food3 = itemDatabase.items.get(11);
+        room7.addItem(food3);
+        Item food4 = itemDatabase.items.get(12);
+        room7.addItem(food4);
+        Item misc8 = itemDatabase.items.get(34);
+        room7.addItem(misc8);
+
+// Room 8
+        Item item11 = itemDatabase.items.get(10); // Assuming item11 should be retrieved from the item list
+        room8.addItem(item11);
+        Item potion7 = itemDatabase.items.get(22);
+        room8.addItem(potion7);
+        Item misc9 = itemDatabase.items.get(35);
+        room8.addItem(misc9);
+
+// Room 9
+        Item food5 = itemDatabase.items.get(4); // Assuming food5 should be retrieved from the item list
+        room9.addItem(food5);
+        Item potion1 = itemDatabase.items.get(13);
+        room9.addItem(potion1);
+        Item potion6 = itemDatabase.items.get(21);
+        room9.addItem(potion6);
+        Item misc10 = itemDatabase.items.get(36);
+        room9.addItem(misc10);
 
     }
 

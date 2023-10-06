@@ -10,7 +10,7 @@ import java.util.List;
 public class Player {
     private final Map map;
 
-    //    private Room requestRoom;
+    private Room requestRoom;
     private Room playerLocation;
     private Weapon equippedWeapon;
     boolean hasEquippedWeapon;
@@ -35,22 +35,12 @@ public class Player {
         return playerLocation;
     }
 
-//    public void setRequestRoom(Room requestRoom) {
-//        this.requestRoom = requestRoom;
-//    }
-//
-//    public Room getRequestRoom() {
-//        return requestRoom;
-//    }
-
-    public List<Item> getInventory() {
-        return inventory;
+    public void setRequestRoom(Room requestRoom) {
+        this.requestRoom = requestRoom;
     }
 
-    public void add(Item item) {
-        if (item != null) {
-            inventory.add(item);
-        }
+    public Room getRequestRoom() {
+        return requestRoom;
     }
 
     public int getHealth() {
@@ -77,9 +67,17 @@ public class Player {
         this.hasEquippedWeapon = hasEquippedWeapon;
     }
 
+    public List<Item> getInventory() {
+        return inventory;
+    }
+
+    public void add(Item item) {
+        if (item != null) {
+            inventory.add(item);
+        }
+    }
 
     public int attack() {
-
              if (hasEquippedWeapon && !equippedWeapon.isRanged()) {
                 int weaponDamage = 0;
                 int strike = 1;
@@ -98,13 +96,11 @@ public class Player {
             }
             if (hasEquippedWeapon && equippedWeapon.isRanged() && equippedWeapon.isOutOfAmmo()) {
             System.out.println();
-            int strike = 0;
-            return strike;
+                return 0;
             }
             else {
                 return 1;
             }
-
     }
 }
 
