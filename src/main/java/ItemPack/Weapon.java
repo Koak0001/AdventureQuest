@@ -1,15 +1,21 @@
 package ItemPack;
-public class Weapon extends Item {
-    private final int damage;
-    private final String ability;
-    private boolean isActive;
 
-    public Weapon(String itemName, String itemDescription, int damage, String ability){
-        super(itemName, itemDescription, ItemType.WEAPON, null, WeaponType.WEAPON);
+import static ItemPack.ItemType.WEAPON;
+
+public class Weapon extends Item {
+    protected final int damage;
+    protected final String ability;
+    protected int ammo;
+    protected final WeaponType weaponType;
+    protected boolean outOfAmmo;
+
+    public Weapon(String itemName, String itemDescription, int damage, String ability, WeaponType weaponType){
+        super(itemName, itemDescription, WEAPON);
         this.damage = damage;
         this.ability = ability;
-        isActive = false;
+        this.outOfAmmo = false;
 
+        this.weaponType = weaponType;
     }
     public int getDamage() {
         return damage;
@@ -18,17 +24,22 @@ public class Weapon extends Item {
 
 
 
-    public WeaponType getWeaponType() {
-        return WeaponType.WEAPON;
+    public int getAmmo(){
+        return ammo;
+    }
+    public boolean isOutOfAmmo() {
+
+        return outOfAmmo; }
+
+    public void setAmmo(int newAmmo) {
+        ammo = newAmmo;
+        if (newAmmo == 0) {
+            outOfAmmo = true;
+        }
     }
 
-    public boolean isActive(Weapon weapon) {
-         return isActive = true;
+    public boolean isRanged() {
+        return this instanceof RangedWeapon;
     }
-    public boolean inActive() {
-        return isActive = false;
-    }
-
-
 
 }

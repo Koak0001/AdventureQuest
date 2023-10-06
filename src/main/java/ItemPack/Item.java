@@ -1,11 +1,12 @@
 package ItemPack;
 
-public class Item {
-    private final String itemName;
-    private final String itemDescription;
-    private final ItemType itemType;
+public abstract class Item {
+    protected final String itemName;
+    protected final String itemDescription;
+    protected final ItemType itemType;
 
-    public Item(String itemName, String itemDescription, ItemType itemType, FoodType FOOD, WeaponType weaponType) {
+
+    public Item(String itemName, String itemDescription, ItemType itemType) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemType = itemType;
@@ -31,6 +32,8 @@ public class Item {
     }
     public FoodType getFoodType() {
         return FoodType.FOOD;
-    }
+           }
+
+
 
 }

@@ -3,11 +3,11 @@ package ItemPack;
 import static ItemPack.ItemType.FOOD;
 
 public class Food extends Item {
-    private final int healthMod;
-    private final String effect;
+    protected final int healthMod;
+    protected final String effect;
 
     public Food(String itemName, String itemDescription, int healthMod, String effect, FoodType foodType) {
-        super(itemName, itemDescription, ItemType.FOOD, foodType, null);
+        super(itemName, itemDescription, FOOD);
         this.healthMod = healthMod;
         this.effect = effect;
     }
@@ -29,7 +29,8 @@ public class Food extends Item {
         return healthMod;
     }
 
-    public FoodType getFoodType() {
-        return FoodType.FOOD;
-    }
+   // public FoodType getFoodType() {
+      //  return FoodType.FOOD;
+  //  }
+
 }

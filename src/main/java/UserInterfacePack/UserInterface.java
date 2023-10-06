@@ -95,13 +95,27 @@ public class UserInterface {
                 case "inventory" -> {
                     if (player.hasEquippedWeapon()){
                     displayInventory();
-                    System.out.println("You're wielding the " + player.getEquippedWeapon().getItemName() );}
+                    System.out.println("You're wielding the " + player.getEquippedWeapon().getItemName());}
                     else {displayInventory();}
                     validCommandProcessed = true;
                 }
+                case "quiver" -> {
+                    if (player.hasEquippedWeapon() && player.getEquippedWeapon().isRanged()){
+                        System.out.println("You have " + player.getEquippedWeapon().getAmmo() + " arrows left in your quiver.");}
+                    else{
+                        System.out.println("You're not equipped with a ranged weapon.");
+                    } validCommandProcessed = true;
+
+                }
                 case "attack" -> {
                     int strikeDamage = player.attack();
-                    if (player.hasEquippedWeapon()){
+                    if (player.hasEquippedWeapon() && player.getEquippedWeapon().isRanged() && player.getEquippedWeapon().isOutOfAmmo()){
+                        System.out.println("Your quiver is empty!");
+                    }if (player.hasEquippedWeapon() && player.getEquippedWeapon().isRanged() && !player.getEquippedWeapon().isOutOfAmmo()){
+                        System.out.println("You let loose an arrow with the " + player.getEquippedWeapon().getItemName() + " for " + strikeDamage + " damage.");
+                        System.out.println(player.getEquippedWeapon().getAbility());
+                        System.out.println("You have " + player.getEquippedWeapon().getAmmo() + " arrows left in your quiver.");
+                    }if (player.hasEquippedWeapon() && !player.getEquippedWeapon().isRanged()){
                         System.out.println("You strike with the " + player.getEquippedWeapon().getItemName() + " for " + strikeDamage + " damage.");
                         System.out.println();//break
                         System.out.println(player.getEquippedWeapon().getAbility());
@@ -341,4 +355,5 @@ public class UserInterface {
             System.out.println(player.getPlayerLocation().getRoomName());
             gameOverCheck();
     }
+
 }

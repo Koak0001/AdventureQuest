@@ -1,7 +1,7 @@
 package ItemPack;
 
 public enum WeaponType {
-    RANGED,
-    WEAPON,
-    SHIELD
+    RANGEDWEAPON,
+    MELEEWEAPON,
+    WEAPON
 }

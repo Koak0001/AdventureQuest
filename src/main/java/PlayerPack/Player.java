@@ -10,7 +10,7 @@ import java.util.List;
 public class Player {
     private final Map map;
 
-//    private Room requestRoom;
+    //    private Room requestRoom;
     private Room playerLocation;
     private Weapon equippedWeapon;
     boolean hasEquippedWeapon;
@@ -77,18 +77,37 @@ public class Player {
         this.hasEquippedWeapon = hasEquippedWeapon;
     }
 
+
     public int attack() {
-        if (hasEquippedWeapon) {
-            int weaponDamage = 0;
-            int strike = 1;
-            weaponDamage = getEquippedWeapon().getDamage();
-            strike = 1 + weaponDamage;
+
+             if (hasEquippedWeapon && !equippedWeapon.isRanged()) {
+                int weaponDamage = 0;
+                int strike = 1;
+                weaponDamage = getEquippedWeapon().getDamage();
+                strike = 1 + weaponDamage;
+                return strike;
+            }
+            if (hasEquippedWeapon && equippedWeapon.isRanged() && !equippedWeapon.isOutOfAmmo()) {
+                int arrows = getEquippedWeapon().getAmmo();
+                int weaponDamage = 0;
+                int shot = 0;
+                weaponDamage = getEquippedWeapon().getDamage();
+                shot = weaponDamage;
+                equippedWeapon.setAmmo(arrows - 1);
+                return shot;
+            }
+            if (hasEquippedWeapon && equippedWeapon.isRanged() && equippedWeapon.isOutOfAmmo()) {
+            System.out.println();
+            int strike = 0;
             return strike;
-        } else {
-            return 1;
-        }
+            }
+            else {
+                return 1;
+            }
+
     }
 }
+
 
 
 
