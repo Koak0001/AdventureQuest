@@ -14,12 +14,7 @@ public class RangedWeapon extends Weapon {
         return true;
     }
 
+}
 
-    }
-
-
-//    public int getAmmo() {
-//        return ammo;
-//    }
 
 

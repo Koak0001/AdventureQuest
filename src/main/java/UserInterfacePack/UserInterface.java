@@ -343,8 +343,7 @@ public class UserInterface {
     public void eatOrDrink(String itemName, boolean isEating) {
            boolean rations = false;
            for (Item item : player.getInventory()) {
-               if (isEating && item.getItemType().equals(ItemType.FOOD) && item.getFoodType().equals(FoodType.FOOD)
-                   || (!isEating && item.getItemType().equals(ItemType.FOOD) && item.getFoodType().equals(POTION))) {
+               if (isEating && item.isEdible || !isEating && item.isLiquid) {
                    Item ration = item;
                    String rationName = ration.getItemName().toLowerCase().replaceAll("\\s+", "");
 

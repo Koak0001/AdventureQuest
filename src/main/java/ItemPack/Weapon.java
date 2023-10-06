@@ -2,7 +2,7 @@ package ItemPack;
 
 import static ItemPack.ItemType.WEAPON;
 
-public class Weapon extends Item {
+public abstract class Weapon extends Item {
     protected final int damage;
     protected final String ability;
     protected int ammo;

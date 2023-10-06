@@ -10,7 +10,12 @@ public class Food extends Item {
         super(itemName, itemDescription, FOOD);
         this.healthMod = healthMod;
         this.effect = effect;
-    }
+        this.isLiquid = false;
+        this.isEdible = true;
+        }
+
+
+
     @Override
     public String toString(){
         return "A " + itemName + " it is " + effect;
