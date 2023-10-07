@@ -54,13 +54,13 @@ public class UserInterface {
                     .trim();
             String input = userInput;
             String[] inputTokens = userInput.split("\\s+", 2);
-
 //            InputTokens results, for debugging purposes.
+
 //            System.out.println("Input: " + userInput);
 //            System.out.println("InputTokens: " + Arrays.toString(inputTokens));
-            boolean validCommandProcessed = false;
-            boolean noPath = false;
 
+//          boolean noPath = false; (still considering how to implement this)
+            boolean validCommandProcessed = false;
             switch (input) {
                 case "north", "n" -> {
                     moveTo(map.getCurrentRoom().northRoom);
@@ -157,7 +157,7 @@ public class UserInterface {
                 if (inputTokens[0].equals("drink")) {
                     eatOrDrink(itemName, false);
                 }
-            } else if (!validCommandProcessed) {
+            } else if (!validCommandProcessed && 1 >= inputTokens.length) {
                 System.out.println("Invalid input");
             }
         }
