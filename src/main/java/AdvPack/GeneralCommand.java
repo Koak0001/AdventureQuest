@@ -41,7 +41,6 @@ public enum GeneralCommand {
     QUIVER {
         @Override
         public void execute(String[] inputTokens, Adventure adventure) {
-            // Assuming adventure has the method to display quiver
             adventure.displayQuiver();
         }
     },

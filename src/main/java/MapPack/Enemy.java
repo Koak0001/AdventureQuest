@@ -52,34 +52,4 @@ public class Enemy {
     public String toString(){
         return "A menacing " + enemyName + " it is " + description + " \n It wields a " +  weapon.getItemDescription();
     }
-
-
-
-//    public void enemyAttack() {
-//        currentHeroHp =
-//        int damage;
-//        Weapon weapon = this.weapon;
-//        int weaponDamage = weapon.getDamage();
-//        int unique = this.unique;
-//
-//        if (hasEquippedWeapon && !weapon.isRanged()) {
-//
-//            weaponDamage = weapon.getDamage();
-//            damage = 1 + unique + weaponDamage;
-//            return damage;
-//        }
-//        if (hasEquippedWeapon && weapon.isRanged()) {
-//
-//            damage = weaponDamage;
-//            return damage;
-//        }
-//        if (!hasEquippedWeapon) {
-//            System.out.println();
-//            damage = 1 + unique;
-//            return damage;
-//        }
-//        else {
-//            return 1;
-//        }
-//    }
 }

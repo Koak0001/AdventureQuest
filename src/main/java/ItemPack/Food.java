@@ -14,8 +14,6 @@ public class Food extends Item {
         this.isEdible = true;
         }
 
-
-
     @Override
     public String toString(){
         return "A " + itemName + " it is " + effect;
@@ -25,6 +23,5 @@ public class Food extends Item {
     public int getHealthMod() {
         return healthMod;
     }
-
 
 }

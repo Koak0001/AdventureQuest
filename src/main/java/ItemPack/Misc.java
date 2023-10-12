@@ -7,6 +7,4 @@ public class Misc extends Item {
         super(itemName, itemDescription, MISC);
     }
 
-
-
 }

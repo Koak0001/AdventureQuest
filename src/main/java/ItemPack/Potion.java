@@ -7,8 +7,6 @@ public class Potion extends Food {
         super(itemName, itemDescription, healthMod, effect, POTION);
         this.isLiquid = true;
         this.isEdible = false;
-
-
     }
 }
 

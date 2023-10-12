@@ -18,7 +18,6 @@ public class RangedWeapon extends Weapon {
         return " a shot with " + itemName + " \n" + ability;
     }
 
-
 }
 
 

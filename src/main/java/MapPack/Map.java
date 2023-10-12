@@ -9,7 +9,7 @@ public class Map {
     private ArrayList<Room> rooms;
     private Room startingRoom;
 
-    private Room currentRoom;
+
     private Room westRoom;
     private Room eastRoom;
     private Room southRoom;
@@ -26,6 +26,7 @@ public class Map {
         rooms = new ArrayList<>();
 
 
+
         // Initialize rooms
         rooms.add(new Room("Room 1 - the Entry Hall\n", "A grand chamber with faded tapestries that once depicted heroic battles.\nThe once-marble floor is now cracked and worn, and a chandelier hangs precariously from the ceiling.\n"));
         rooms.add(new Room("Room 2 - Hallway of Echoes\n", "A long, narrow corridor lined with dusty suits of armor that stand like silent sentinels.\nTorches, long extinguished, still line the walls, casting eerie shadows.\n"));
@@ -38,12 +39,25 @@ public class Map {
         rooms.add(new Room("Room 9 - Library of Lost Knowledge\n", "Rows of rotting bookshelves filled with disintegrating tomes.\nMotes of dust dance in the faint rays of light filtering through boarded-up windows.\n"));
         startingRoom = rooms.get(0);
 
-        Enemy enemy1 = new Enemy("ork", "big green and mean", 50, (Weapon) itemDatabase.items.get(3), 5);
-        Enemy enemy2 = new Enemy("gnoll", "a snarling gnoll", 50, (Weapon) itemDatabase.items.get(6), 2);
+        Enemy enemy1 = new Enemy("ork", "big green and mean", 50, (Weapon) itemDatabase.items.get(44), 5);
+        Enemy enemy2 = new Enemy("gnoll", "a snarling gnoll", 50, (Weapon) itemDatabase.items.get(45), 2);
+        Enemy enemy3 = new Enemy("troll", "a hulking brute that's not too bright", 60, (Weapon) itemDatabase.items.get(46), 4);
+        Enemy enemy4 = new Enemy("kobold", "a tiny menace, cunning and quick", 40, (Weapon) itemDatabase.items.get(47), 3);
+        Enemy enemy5 = new Enemy("ogre", "a massive creature with enormous strength", 80, (Weapon) itemDatabase.items.get(48), 7);
+        Enemy enemy6 = new Enemy("naga", "a serpent-bodied creature with piercing eyes", 55, (Weapon) itemDatabase.items.get(49), 4);
+        Enemy enemy7 = new Enemy("wraith", "an ethereal being that saps the life out of its victims", 45, (Weapon) itemDatabase.items.get(50), 5);
+        Enemy enemy8 = new Enemy("minotaur", "a half-man, half-bull monster that charges with rage", 70, (Weapon) itemDatabase.items.get(51), 6);
 
-        // Set the starting room
+
+        // Room enemies
         rooms.get(1).addEnemy(enemy1);
         rooms.get(1).addEnemy(enemy2);
+        rooms.get(3).addEnemy(enemy3);
+        rooms.get(3).addEnemy(enemy4);
+        rooms.get(4).addEnemy(enemy5);
+        rooms.get(7).addEnemy(enemy7);
+        rooms.get(6).addEnemy(enemy6);
+        rooms.get(6).addEnemy(enemy8);
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(enemy1);
         enemies.add(enemy2);
@@ -100,7 +114,7 @@ public class Map {
         int[] itemIndices8 = {10, 22, 35};
         int[] itemIndices9 = {4, 13, 21, 36};
 
-        // Add items to rooms using the item indices
+        //  items to rooms using indices
         addItemsToRoom(itemIndices1, room1, itemDatabase);
         addItemsToRoom(itemIndices2, room2, itemDatabase);
         addItemsToRoom(itemIndices3, room3, itemDatabase);

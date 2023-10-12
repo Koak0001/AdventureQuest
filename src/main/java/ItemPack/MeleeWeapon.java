@@ -5,7 +5,6 @@ public class MeleeWeapon extends Weapon {
         super(itemName, itemDescription, damage, ability, MELEEWEAPON);
 
     }
-
     @Override
     public boolean isRanged() {
         return false;
@@ -19,6 +18,4 @@ public class MeleeWeapon extends Weapon {
     public boolean isEquippable(){
         return true;
     }
-
-
 }

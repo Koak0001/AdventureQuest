@@ -19,8 +19,6 @@ public abstract class Weapon extends Item {
 
     }
 
-
-
     public boolean isEquippable(){
         return true;
     }

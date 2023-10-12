@@ -10,14 +10,14 @@ public enum CombatCommand {
         @Override
         public void execute(String[] inputTokens, Adventure adventure, Room currentRoom) {
             List<Enemy> enemiesInRoom = adventure.getCurrentRoom().getEnemies();
+//              debug lines
 //            System.out.println("Attempting attack in: " + currentRoom.getRoomName());
 //            System.out.println("Enemies in room: " + enemiesInRoom);
             if (!enemiesInRoom.isEmpty()) {
                 if (inputTokens.length == 1) {
-//                    System.out.println("Attempting to attack the first enemy.");
+                    //trigger for input of only "attack", we target the first enemy in the List.
                     adventure.attack(enemiesInRoom.get(0));
-                } else { // "attack enemyName"
-//                    System.out.println("Attempting to attack a specific enemy.");
+                } else { //else, if the line is 2 input tokens, we namecheck token 2 at integer 1, with current enemy List
                     boolean attacked = false;
                     for (Enemy enemy : enemiesInRoom) {
                         if (inputTokens[1].equals(enemy.getEnemyName().toLowerCase())) {

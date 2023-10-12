@@ -30,7 +30,7 @@ public class Room {
 
     }
 
-    // Setters
+
 
     public void setNorthRoom(Room room) {
         this.northRoom = room;
@@ -45,7 +45,7 @@ public class Room {
         this.westRoom = room;
     }
 
-   // Getters
+
     public String getRoomName() {
         return roomName;
     }
@@ -53,8 +53,6 @@ public class Room {
         return roomDesc;
     }
 
-
-    // Booleans
     public boolean isVisited() {
         return visited;
     }
@@ -66,8 +64,6 @@ public class Room {
     public String toString() {
         return "You are in" + roomName + " \n" +  roomDesc;}
 
-
-    // Getter for items
     public ArrayList<Item> getItems() {
         return items;
     }
@@ -75,8 +71,6 @@ public class Room {
         return enemies;
     }
 
-
-    // Add an item to the room
     public void addItem(Item roomItem)  {
         if (roomItem != null) {
             items.add(roomItem);

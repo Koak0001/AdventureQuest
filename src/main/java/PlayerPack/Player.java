@@ -11,9 +11,7 @@ import java.util.List;
 
 public class Player {
     private final Map map;
-      private Room requestRoom;
-    private Adventure adventure;
-    private Room playerLocation;
+
     private Weapon equippedWeapon;
     boolean hasEquippedWeapon;
     private int health;

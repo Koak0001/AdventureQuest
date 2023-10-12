@@ -7,8 +7,8 @@ public class ItemDatabase {
     public ArrayList<Item> items = new ArrayList<>();
 
     public ItemDatabase() {
-        //int itemCount = items.size();
-        //System.out.println("Number of items in the ArrayList: " + itemCount);
+//        int itemCount = items.size();
+//        System.out.println("Number of items in the ArrayList: " + itemCount);
         //8Food and 12Potion 9Weapon 9 Misc
         items.add(new MeleeWeapon("Frostbite Sword", "A finely-crafted longsword with an icy blue hilt. \nIts blade, etched with frost patterns, feels unnaturally cold to the touch.", 6, "Cold as death itself."));
         items.add(new MeleeWeapon("Spiteful Axe", "A wicked battle axe with a malevolent aura, its razor-sharp blade hungers for blood.", 2, "Hungers for vengeance."));
@@ -20,9 +20,18 @@ public class ItemDatabase {
         items.add(new MeleeWeapon("Frostbite Rapier", "A slender rapier with an icy blue hilt and a blade etched in frost patterns, chilling to the touch.", 6, "Cuts through the cold night."));
         items.add(new MeleeWeapon("Echoing Blade of Shadows", "A wickedly curved short sword with an ebony hilt. \nIt has the power to summon shadowy duplicates of the wielder to confuse and disorient foes.", 8, "Shadows everywhere!"));
 
+        //Enemy weapons:
+        items.add(new RangedWeapon("Practice Bow", "A simple wooden bow designed for archery practice.", 4, "Ideal for beginners learning the art of archery.", 15, false));
+        items.add(new MeleeWeapon("Rusty Shortsword", "An old and rusted shortsword, barely suitable for combat.", 2, "It's seen better days, but it can still cut things."));
+        items.add(new RangedWeapon("Wooden Slingshot", "A makeshift slingshot crafted from wood and rubber bands.", 2, "It hurls small stones with limited accuracy.", 10, false));
+        items.add(new MeleeWeapon("Iron Dagger", "A basic iron dagger, commonly used for self-defense.", 3, "A modest weapon for beginners."));
+        items.add(new MeleeWeapon("Spiked Club", "A crude club adorned with vicious spikes, perfect for close combat.", 5, "It inflicts severe pain with each swing."));
+        items.add(new RangedWeapon("Rathide Sling", "A simple but effective sling made from Rathide, suitable for accurate projectile attacks.", 3, "It launches small projectiles with precision, striking foes from a distance.", 15, false));
+
+
 
         items.add(new Food("Hearty Stew", "a bowl of hearty stew, packed with chunks of meat and vegetables.", 3, "savory and filling.", FOOD));
-        items.add(new Food("Sweet berry Pie", "a freshly baked pie with a sweet berry filling.", 2, "deliciously sweet and tangy.", FOOD));
+        items.add(new Food("Sweet berry cake", "a freshly baked cake with a sweet berry filling.", 2, "deliciously sweet and tangy.", FOOD));
         items.add(new Food("Spicy Curry", "a plate of spicy curry with fragrant spices and tender meat.", 4, "fiery and flavorful.", FOOD));
         items.add(new Food("Crispy Bacon", "crisp strips of bacon cooked to perfection.", 2, "salty and satisfying.", FOOD));
         items.add(new Food("Roasted Chestnuts", "warm and roasted chestnuts, seasoned with a hint of salt.", 1, "nutty and comforting.", FOOD));
@@ -52,5 +61,23 @@ public class ItemDatabase {
         items.add(new Misc("Dragon Scale", "A gleaming scale from a vanquished dragon, said to possess mystical properties."));
         items.add(new Misc("Ethereal Compass", "A small compass that always points toward your next destination, no matter how obscure."));
         items.add(new Misc("Lucky Rabbit's Foot", "A preserved rabbit's foot that, despite its origins, is believed to bring good luck to its owner."));
+
+        //Enemy weapons:
+        items.add(new RangedWeapon("Practice Bow", "A simple wooden bow designed for archery practice.", 4, "Ideal for beginners learning the art of archery.", 15, false));
+        items.add(new MeleeWeapon("Rusty Shortsword", "An old and rusted shortsword, barely suitable for combat.", 2, "It's seen better days, but it can still cut things."));
+        items.add(new RangedWeapon("Wooden Slingshot", "A makeshift slingshot crafted from wood and rubber bands.", 2, "It hurls small stones with limited accuracy.", 10, false));
+        items.add(new MeleeWeapon("Iron Dagger", "A basic iron dagger, commonly used for self-defense.", 3, "A modest weapon for beginners."));
+        items.add(new MeleeWeapon("Spiked Club", "A crude club adorned with vicious spikes, perfect for close combat.", 5, "It inflicts severe pain with each swing."));
+        items.add(new RangedWeapon("Rathide Sling", "A simple but effective sling made from Rathide, suitable for accurate projectile attacks.", 3, "It launches small projectiles with precision, striking foes from a distance.", 15, false));
+        items.add(new RangedWeapon("Elmwood Crossbow", "A sturdy crossbow made of fine Elmwood. Designed for longer range.", 5, "Despite its simple design, it packs a punch.", 20, false));
+        items.add(new MeleeWeapon("Obsidian Machete", "A sharp blade forged from obsidian, known for swift slashes.", 4, "Its dark sheen is a reminder of its lethal edge."));
+
+//       Lines for printout of objects in array
+//        int itemCount = items.size();
+//        System.out.println("Number of items in the ArrayList: " + itemCount);
+//        for (int i = 0; i < items.size(); i++) {
+//            System.out.println("Index: " + i + ", Item: " + items.get(i));
+        }
+
     }
 }

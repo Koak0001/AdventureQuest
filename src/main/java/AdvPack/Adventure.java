@@ -13,7 +13,7 @@ public class Adventure {
     private Map map;
     private Room currentRoom;
     private Player player;
-    private ArrayList<Enemy> enemies;
+
     private boolean inCombat;
     private boolean playerTurn;
     private boolean turn1;
@@ -100,20 +100,17 @@ public class Adventure {
 
         }
 
-
-
-
     ////////////////////////////////////
     public void attack(Enemy targetEnemy) {
         Player player = getPlayer();
         Weapon weapon = player.getEquippedWeapon();
-        int damage = 0;
+        int damage = 5;
 
         if (player.hasEquippedWeapon()) {
             int weaponDamage = weapon.getDamage();
 
             if (!weapon.isRanged()) {
-                damage = 5 + weaponDamage;
+                damage = 20 + weaponDamage;
             } else if (weapon.isRanged() && !weapon.isOutOfAmmo()) {
                 int arrows = player.getEquippedWeapon().getAmmo();
                 damage = weaponDamage;
@@ -390,7 +387,7 @@ public class Adventure {
     public void unEquipWeapon() {
         if (getPlayer().hasEquippedWeapon()) {
             Item equippedWeapon = getPlayer().getEquippedWeapon();
-            getPlayer().getInventory().add(equippedWeapon); // Add the unequipped weapon back to the inventory
+            getPlayer().getInventory().add(equippedWeapon);
             getPlayer().setHasEquippedWeapon(false);
             System.out.println("You've unequipped the " + equippedWeapon.getItemName());
         } else {
@@ -402,7 +399,7 @@ public class Adventure {
             System.out.println("You must unequip your current weapon.");
         } else {
             Weapon weapontoEquip = null;
-            List<Item> weaponsToRemove = new ArrayList<>();
+            List<Item> weaponsToRemove = new ArrayList<>(); //created a seperate array for items to remove, in an attempt to avoid and exception error
 
             for (Item item : getPlayer().getInventory()) {
                 if (item.isEquippable && item.getItemName().toLowerCase().contains(toEquip)) {
@@ -416,7 +413,7 @@ public class Adventure {
                 getPlayer().setHasEquippedWeapon(true);
                 System.out.println("You've equipped " + weapontoEquip.getItemName());
                 System.out.println(weapontoEquip.getAbility());
-                weaponsToRemove.add(weapontoEquip); // Add to the list of weapons to remove
+                weaponsToRemove.add(weapontoEquip);
             } else {
                 System.out.println("No equippable weapon called " + toEquip + " found in your inventory.");
             }
