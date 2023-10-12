@@ -11,4 +11,14 @@ public class MeleeWeapon extends Weapon {
         return false;
     }
 
+
+    public String toString(){
+        return " a strike with " + itemName + " \n" + ability;
+    }
+    @Override
+    public boolean isEquippable(){
+        return true;
+    }
+
+
 }

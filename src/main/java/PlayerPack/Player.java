@@ -1,6 +1,8 @@
 package PlayerPack;
+import AdvPack.Adventure;
 import ItemPack.Item;
 import ItemPack.Weapon;
+import MapPack.Enemy;
 import MapPack.Map;
 import RoomPack.Room;
 
@@ -9,8 +11,8 @@ import java.util.List;
 
 public class Player {
     private final Map map;
-
-    private Room requestRoom;
+      private Room requestRoom;
+    private Adventure adventure;
     private Room playerLocation;
     private Weapon equippedWeapon;
     boolean hasEquippedWeapon;
@@ -21,26 +23,10 @@ public class Player {
     public Player(Map map) {
         this.map = map;
         this.inventory = new ArrayList<>();
-        this.playerLocation = map.getCurrentRoom();
-        this.health = Math.min(100, health);
+        this.health = 100;
         this.equippedWeapon = null;
         this.hasEquippedWeapon = false;
-    }
 
-    public void setPlayerLocation(Room playerLocation) {
-        this.playerLocation = playerLocation;
-    }
-
-    public Room getPlayerLocation() {
-        return playerLocation;
-    }
-
-    public void setRequestRoom(Room requestRoom) {
-        this.requestRoom = requestRoom;
-    }
-
-    public Room getRequestRoom() {
-        return requestRoom;
     }
 
     public int getHealth() {
@@ -77,32 +63,10 @@ public class Player {
         }
     }
 
-    public int attack() {
-             if (hasEquippedWeapon && !equippedWeapon.isRanged()) {
-                int weaponDamage = 0;
-                int strike = 1;
-                weaponDamage = getEquippedWeapon().getDamage();
-                strike = 1 + weaponDamage;
-                return strike;
-            }
-            if (hasEquippedWeapon && equippedWeapon.isRanged() && !equippedWeapon.isOutOfAmmo()) {
-                int arrows = getEquippedWeapon().getAmmo();
-                int weaponDamage = 0;
-                int shot = 0;
-                weaponDamage = getEquippedWeapon().getDamage();
-                shot = weaponDamage;
-                equippedWeapon.setAmmo(arrows - 1);
-                return shot;
-            }
-            if (hasEquippedWeapon && equippedWeapon.isRanged() && equippedWeapon.isOutOfAmmo()) {
-            System.out.println();
-                return 0;
-            }
-            else {
-                return 1;
-            }
-    }
+
 }
+
+
 
 
 

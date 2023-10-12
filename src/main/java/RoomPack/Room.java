@@ -1,6 +1,7 @@
 package RoomPack;
 
 import ItemPack.Item;
+import MapPack.Enemy;
 
 import java.util.ArrayList;
 
@@ -13,18 +14,19 @@ public class Room {
     public Room westRoom;
     public boolean visited;
     private final ArrayList<Item> items;
-    private Room currentRoom;
+    private final ArrayList<Enemy> enemies;
+
 
     public Room(String roomName, String roomDesc) {
         this.roomName = roomName;
         this.roomDesc = roomDesc;
         this.items = new ArrayList<>();
+        this.enemies = new ArrayList<>();
         this.northRoom = null;
         this.eastRoom = null;
         this.southRoom = null;
         this.westRoom = null;
         this.visited = false;
-        this.currentRoom = null;
 
     }
 
@@ -52,7 +54,6 @@ public class Room {
     }
 
 
-
     // Booleans
     public boolean isVisited() {
         return visited;
@@ -70,6 +71,10 @@ public class Room {
     public ArrayList<Item> getItems() {
         return items;
     }
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
+    }
+
 
     // Add an item to the room
     public void addItem(Item roomItem)  {
@@ -77,19 +82,10 @@ public class Room {
             items.add(roomItem);
         }
     }
-
-    public Room getWestRoom() {
-        return westRoom;
-    }
-    public Room getEastRoom() {return eastRoom;}
-    public Room getSouthRoom() {
-        return southRoom;
-    }
-    public Room getNorthRoom() {
-        return northRoom;
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
     }
 
 
-
-    }
+}
 

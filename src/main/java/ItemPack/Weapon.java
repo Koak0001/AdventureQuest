@@ -14,10 +14,16 @@ public abstract class Weapon extends Item {
         this.damage = damage;
         this.ability = ability;
         this.outOfAmmo = false;
-
         this.weaponType = weaponType;
+        this.isEquippable = true;
+
     }
 
+
+
+    public boolean isEquippable(){
+        return true;
+    }
     public int getDamage() {
         return damage;
     }
@@ -28,7 +34,12 @@ public abstract class Weapon extends Item {
     }
     public boolean isOutOfAmmo() {
 
-        return outOfAmmo; }
+        return outOfAmmo;
+    }
+    @Override
+    public String toString(){
+        return itemDescription;
+    }
 
     public void setAmmo(int newAmmo) {
         ammo = newAmmo;

@@ -6,6 +6,7 @@ public abstract class Item {
     protected final ItemType itemType;
     public boolean isLiquid = false;
     public boolean isEdible = false;
+    public boolean isEquippable = false;
 
 
     public Item(String itemName, String itemDescription, ItemType itemType) {
@@ -14,6 +15,9 @@ public abstract class Item {
         this.itemType = itemType;
     }
 
+
+
+    @Override
     public String toString(){
         return "The " + itemName + " \n" + itemDescription + " \n";
     }
@@ -28,8 +32,6 @@ public abstract class Item {
     public int getHealthMod() {
         return 0;
     }
-
-
 
 
 }

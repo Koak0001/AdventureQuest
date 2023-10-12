@@ -13,6 +13,11 @@ public class RangedWeapon extends Weapon {
     public boolean isRanged() {
         return true;
     }
+    @Override
+    public String toString(){
+        return " a shot with " + itemName + " \n" + ability;
+    }
+
 
 }
 

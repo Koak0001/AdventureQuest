@@ -5,173 +5,140 @@ import RoomPack.Room;
 import java.util.ArrayList;
 
 public class Map {
+
+    private ArrayList<Room> rooms;
+    private Room startingRoom;
+
     private Room currentRoom;
-    private ArrayList<Item> items;
+    private Room westRoom;
+    private Room eastRoom;
+    private Room southRoom;
+    private Room northRoom;
+
 
     public Map() {
         initializeMap();
     }
 
+
     private void initializeMap() {
         ItemDatabase itemDatabase = new ItemDatabase();
-        items = new ArrayList<>();
+        rooms = new ArrayList<>();
 
 
-        // Room overview
-        Room room1 = new Room("Room 1 - the Entry Hall\n", "A grand chamber with faded tapestries that once depicted heroic battles.\nThe once-marble floor is now cracked and worn, and a chandelier hangs precariously from the ceiling.\n");
-        Room room2 = new Room("Room 2 - Hallway of Echoes\n", "A long, narrow corridor lined with dusty suits of armor that stand like silent sentinels.\nTorches, long extinguished, still line the walls, casting eerie shadows.\n");
-        Room room3 = new Room("Room 3 - Forgotten Smithy\n", "A blacksmith's workshop, filled with rusted tools and broken anvils.\nThe air is thick with the scent of old metalwork, and the forge lies cold and lifeless.\n");
-        Room room4 = new Room("Room 4 - Guard Room of Yore\n", "The remains of a guard room, with ancient weapons rusting on the racks.\nFaded banners hang from the walls, bearing the insignia of a long-lost kingdom.\n");
-        Room room5 = new Room("Room 5 - Throne Room of Decay\n", "A decaying chamber where a tarnished throne sits atop a dais.\nTattered banners hang from the walls, and the ceiling is adorned with faded frescoes.\n");
-        Room room6 = new Room("Room 6 - Shrine of the Forgotten Gods\n", "An ornate room dedicated to long-forgotten deities.\nBroken statues lie toppled on the floor, and the once-sacred altar is now covered in spiderwebs.\n");
-        Room room7 = new Room("Room 7 - Macabre Art Room\n", "A chilling gallery displaying gruesome paintings and sculptures.\nThe artwork seems to come to life in the dim light, evoking a sense of dread.\n");
-        Room room8 = new Room("Room 8 - Chamber of Whispers\n", "A small, eerie room filled with tattered curtains that billow mysteriously in the stagnant air.\nFaint whispers seem to emanate from the walls themselves, carrying ancient secrets.\n");
-        Room room9 = new Room("Room 9 - Library of Lost Knowledge\n", "Rows of rotting bookshelves filled with disintegrating tomes.\nMotes of dust dance in the faint rays of light filtering through boarded-up windows.\n");
+        // Initialize rooms
+        rooms.add(new Room("Room 1 - the Entry Hall\n", "A grand chamber with faded tapestries that once depicted heroic battles.\nThe once-marble floor is now cracked and worn, and a chandelier hangs precariously from the ceiling.\n"));
+        rooms.add(new Room("Room 2 - Hallway of Echoes\n", "A long, narrow corridor lined with dusty suits of armor that stand like silent sentinels.\nTorches, long extinguished, still line the walls, casting eerie shadows.\n"));
+        rooms.add(new Room("Room 3 - Forgotten Smithy\n", "A blacksmith's workshop, filled with rusted tools and broken anvils.\nThe air is thick with the scent of old metalwork, and the forge lies cold and lifeless.\n"));
+        rooms.add(new Room("Room 4 - Guard Room of Yore\n", "The remains of a guard room, with ancient weapons rusting on the racks.\nFaded banners hang from the walls, bearing the insignia of a long-lost kingdom.\n"));
+        rooms.add(new Room("Room 5 - Throne Room of Decay\n", "A decaying chamber where a tarnished throne sits atop a dais.\nTattered banners hang from the walls, and the ceiling is adorned with faded frescoes.\n"));
+        rooms.add(new Room("Room 6 - Shrine of the Forgotten Gods\n", "An ornate room dedicated to long-forgotten deities.\nBroken statues lie toppled on the floor, and the once-sacred altar is now covered in spiderwebs.\n"));
+        rooms.add(new Room("Room 7 - Macabre Art Room\n", "A chilling gallery displaying gruesome paintings and sculptures.\nThe artwork seems to come to life in the dim light, evoking a sense of dread.\n"));
+        rooms.add(new Room("Room 8 - Chamber of Whispers\n", "A small, eerie room filled with tattered curtains that billow mysteriously in the stagnant air.\nFaint whispers seem to emanate from the walls themselves, carrying ancient secrets.\n"));
+        rooms.add(new Room("Room 9 - Library of Lost Knowledge\n", "Rows of rotting bookshelves filled with disintegrating tomes.\nMotes of dust dance in the faint rays of light filtering through boarded-up windows.\n"));
+        startingRoom = rooms.get(0);
+
+        Enemy enemy1 = new Enemy("ork", "big green and mean", 50, (Weapon) itemDatabase.items.get(3), 5);
+        Enemy enemy2 = new Enemy("gnoll", "a snarling gnoll", 50, (Weapon) itemDatabase.items.get(6), 2);
+
+        // Set the starting room
+        rooms.get(1).addEnemy(enemy1);
+        rooms.get(1).addEnemy(enemy2);
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+
 
         // Room connectors and Room items:
 
-        room1.setEastRoom(room2);
-        room1.setSouthRoom(room4);
-        //
-        room2.setEastRoom(room3);
-        room2.setWestRoom(room1);
-        //
-        room3.setSouthRoom(room6);
-        room3.setWestRoom(room2);
-        //
-        room4.setNorthRoom(room1);
-        room4.setSouthRoom(room7);
-        //
-        room5.setSouthRoom(room8);
-        //
-        room6.setNorthRoom(room3);
-        room6.setSouthRoom(room9);
-        //
-        room7.setNorthRoom(room4);
-        room7.setEastRoom(room8);
-        //
-        room8.setNorthRoom(room5);
-        room8.setEastRoom(room9);
-        room8.setWestRoom(room7);
-        //
-        room9.setNorthRoom(room6);
-        room9.setWestRoom(room8);
+        rooms.get(0).setEastRoom(rooms.get(1));
+        rooms.get(0).setSouthRoom(rooms.get(3));
 
-        currentRoom = room1;
+        rooms.get(1).setEastRoom(rooms.get(2));
+        rooms.get(1).setWestRoom(rooms.get(0));
 
-// Room 1
-        Item item1 = itemDatabase.items.get(0);
-        room1.addItem(item1);
-        Item item2 = itemDatabase.items.get(1);
-        room1.addItem(item2);
-        Item item6 = itemDatabase.items.get(5);
-        room1.addItem(item6);
-        Item food1 = itemDatabase.items.get(9);
-        room1.addItem(food1);
-        Item food6 = itemDatabase.items.get(14);
-        room1.addItem(food6);
-        Item food7 = itemDatabase.items.get(15);
-        room1.addItem(food7);
-        Item potion2 = itemDatabase.items.get(17);
-        room1.addItem(potion2);
-        Item potion3 = itemDatabase.items.get(18);
-        room1.addItem(potion3);
-        Item misc3 = itemDatabase.items.get(29);
-        room1.addItem(misc3);
-        Item misc1 = itemDatabase.items.get(27);
-        room1.addItem(misc1);
-        Item misc2 = itemDatabase.items.get(28);
-        room1.addItem(misc2);
+        rooms.get(2).setSouthRoom(rooms.get(5));
+        rooms.get(2).setWestRoom(rooms.get(1));
 
-// Room 2
-        Item item3 = itemDatabase.items.get(2);
-        room2.addItem(item3);
-        Item item8 = itemDatabase.items.get(7);
-        room2.addItem(item8);
-        Item food2 = itemDatabase.items.get(10);
-        room2.addItem(food2);
-        Item food8 = itemDatabase.items.get(16);
-        room2.addItem(food8);
-        Item potion4 = itemDatabase.items.get(19);
-        room2.addItem(potion4);
-        Item potion10 = itemDatabase.items.get(25);
-        room2.addItem(potion10);
-        Item potion11 = itemDatabase.items.get(26);
-        room2.addItem(potion11);
+        rooms.get(3).setNorthRoom(rooms.get(0));
+        rooms.get(3).setSouthRoom(rooms.get(6));
 
-// Room 3
-        Item item4 = itemDatabase.items.get(3);
-        room3.addItem(item4);
-        Item item10 = itemDatabase.items.get(9); // Assuming item10 should be retrieved from the item list
-        room3.addItem(item10);
-        Item potion5 = itemDatabase.items.get(20);
-        room3.addItem(potion5);
-        Item misc4 = itemDatabase.items.get(30);
-        room3.addItem(misc4);
+        rooms.get(4).setSouthRoom(rooms.get(7));
 
-// Room 4
-        Item potion8 = itemDatabase.items.get(23);
-        room4.addItem(potion8);
-        Item misc5 = itemDatabase.items.get(31);
-        room4.addItem(misc5);
+        rooms.get(5).setNorthRoom(rooms.get(2));
+        rooms.get(5).setSouthRoom(rooms.get(8));
 
-// Room 5
-        Item item5 = itemDatabase.items.get(4);
-        room5.addItem(item5);
-        Item item7 = itemDatabase.items.get(6);
-        room5.addItem(item7);
-        Item item9 = itemDatabase.items.get(8);
-        room5.addItem(item9);
-        Item misc6 = itemDatabase.items.get(32);
-        room5.addItem(misc6);
+        rooms.get(6).setNorthRoom(rooms.get(3));
+        rooms.get(6).setEastRoom(rooms.get(7));
 
-// Room 6
-        Item potion9 = itemDatabase.items.get(24);
-        room6.addItem(potion9);
-        Item misc7 = itemDatabase.items.get(33);
-        room6.addItem(misc7);
+        rooms.get(7).setNorthRoom(rooms.get(4));
+        rooms.get(7).setEastRoom(rooms.get(8));
+        rooms.get(7).setWestRoom(rooms.get(6));
 
-// Room 7
-        Item food3 = itemDatabase.items.get(11);
-        room7.addItem(food3);
-        Item food4 = itemDatabase.items.get(12);
-        room7.addItem(food4);
-        Item misc8 = itemDatabase.items.get(34);
-        room7.addItem(misc8);
+        rooms.get(8).setNorthRoom(rooms.get(5));
+        rooms.get(8).setWestRoom(rooms.get(7));
 
-// Room 8
-        Item item11 = itemDatabase.items.get(10); // Assuming item11 should be retrieved from the item list
-        room8.addItem(item11);
-        Item potion7 = itemDatabase.items.get(22);
-        room8.addItem(potion7);
-        Item misc9 = itemDatabase.items.get(35);
-        room8.addItem(misc9);
 
-// Room 9
-        Item food5 = itemDatabase.items.get(4); // Assuming food5 should be retrieved from the item list
-        room9.addItem(food5);
-        Item potion1 = itemDatabase.items.get(13);
-        room9.addItem(potion1);
-        Item potion6 = itemDatabase.items.get(21);
-        room9.addItem(potion6);
-        Item misc10 = itemDatabase.items.get(36);
-        room9.addItem(misc10);
+        Room room1 = rooms.get(0);
+        Room room2 = rooms.get(1);
+        Room room3 = rooms.get(2);
+        Room room4 = rooms.get(3);
+        Room room5 = rooms.get(4);
+        Room room6 = rooms.get(5);
+        Room room7 = rooms.get(6);
+        Room room8 = rooms.get(7);
+        Room room9 = rooms.get(8);
 
+
+        int[] itemIndices1 = {0, 1, 5, 9, 14, 15, 17, 18, 27, 28, 29};
+        int[] itemIndices2 = {2, 7, 10, 16, 19, 25, 26};
+        int[] itemIndices3 = {3, 9, 20, 30};
+        int[] itemIndices4 = {23, 31};
+        int[] itemIndices5 = {4, 6, 8, 32};
+        int[] itemIndices6 = {24, 33};
+        int[] itemIndices7 = {11, 12, 34};
+        int[] itemIndices8 = {10, 22, 35};
+        int[] itemIndices9 = {4, 13, 21, 36};
+
+        // Add items to rooms using the item indices
+        addItemsToRoom(itemIndices1, room1, itemDatabase);
+        addItemsToRoom(itemIndices2, room2, itemDatabase);
+        addItemsToRoom(itemIndices3, room3, itemDatabase);
+        addItemsToRoom(itemIndices4, room4, itemDatabase);
+        addItemsToRoom(itemIndices5, room5, itemDatabase);
+        addItemsToRoom(itemIndices6, room6, itemDatabase);
+        addItemsToRoom(itemIndices7, room7, itemDatabase);
+        addItemsToRoom(itemIndices8, room8, itemDatabase);
+        addItemsToRoom(itemIndices9, room9, itemDatabase);
     }
 
-    // Getter for the current room
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
+    public Room getWestRoom() {
+        return westRoom;
+    }
+    public Room getEastRoom() {return eastRoom;}
+    public Room getSouthRoom() {
+        return southRoom;
+    }
+    public Room getNorthRoom() {
+        return northRoom;
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
+    public Room getStartingRoom() {
+        return startingRoom;
+    }
+    public ArrayList<Room> getRooms() {
+        return rooms;
     }
 
-
-
-
+    private void addItemsToRoom(int[] itemIndices, Room room, ItemDatabase itemDatabase) {
+        for (int index : itemIndices) {
+            Item item = itemDatabase.items.get(index);
+            room.addItem(item);
+        }
     }
+}
+
+
 
 
 

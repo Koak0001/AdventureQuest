@@ -1,6 +1,4 @@
 package ItemPack;
-
-
 import java.util.ArrayList;
 
 import static ItemPack.FoodType.FOOD;
